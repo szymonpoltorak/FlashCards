@@ -1,7 +1,7 @@
 package pl.edu.pw.ee.flashcards;
 
 public enum WindowSize {
-    WIDTH(1270), HEIGHT(720);
+    WIDTH(800), HEIGHT(600);
 
     private final double value;
 
