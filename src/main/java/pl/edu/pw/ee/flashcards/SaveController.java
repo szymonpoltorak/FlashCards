@@ -8,17 +8,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static pl.edu.pw.ee.flashcards.FxmlUrls.SAVE;
+import static pl.edu.pw.ee.flashcards.FxmlUrls.MAIN;
 
-public class FlashCardController implements Initializable {
+public class SaveController implements Initializable {
     @FXML
-    private Button addButton;
+    private Button returnButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addButton.setOnAction(event -> {
+        returnButton.setOnAction(event -> {
             try {
-                SceneSwitcher.switchToNewScene(SAVE.getPath(), event);
+                SceneSwitcher.switchToNewScene(MAIN.getPath(), event);
             } catch (IOException e) {
                 System.err.println("IOException");
                 e.printStackTrace();

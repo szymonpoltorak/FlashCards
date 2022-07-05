@@ -8,12 +8,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class FlashCardApp extends Application {
+import static pl.edu.pw.ee.flashcards.FxmlUrls.MAIN;
+
+public class FlashCard extends Application {
     @Override
     public void start(@NotNull Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(getClass().getResource("fxml/FlashCardController.fxml"));
-        var scene = new Scene(fxmlLoader.load(), WindowSize.WIDTH.getValue(), WindowSize.HEIGHT.getValue());
-        stage.setTitle("Hello!");
+        var scene = new Scene(FXMLLoader.load(MAIN.getPath()));
+
+        stage.setTitle("FlashCards");
         stage.setScene(scene);
         stage.show();
     }

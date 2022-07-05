@@ -100,7 +100,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pl.edu.pw.ee.flashcards/pl.edu.pw.ee.flashcards.FlashCardApp</mainClass>
+                            <mainClass>pl.edu.pw.ee.flashcards/pl.edu.pw.ee.flashcards.FlashCard</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
