@@ -3,7 +3,8 @@ package pl.edu.pw.ee.flashcards;
 import java.net.URL;
 
 public enum FxmlUrls {
-    SAVE(FxmlUrls.class.getResource("fxml/SaveController.fxml")), MAIN(FxmlUrls.class.getResource("fxml/FlashCardController.fxml"));
+    SAVE(FxmlUrls.class.getResource("fxml/SaveController.fxml")), MAIN(FxmlUrls.class.getResource("fxml/FlashCardController.fxml")),
+    MANAGE(FxmlUrls.class.getResource("fxml/ManageController.fxml"));
 
     private final URL path;
 

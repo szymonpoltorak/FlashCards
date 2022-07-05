@@ -3,6 +3,8 @@ package pl.edu.pw.ee.flashcards;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TreeView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +15,14 @@ import static pl.edu.pw.ee.flashcards.FxmlUrls.MAIN;
 public class SaveController implements Initializable {
     @FXML
     private Button returnButton;
+    @FXML
+    private Button addButton;
+    @FXML
+    private TextField foreignName;
+    @FXML
+    private TextField nativeName;
+    @FXML
+    private TreeView<String> flashCardsTree;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

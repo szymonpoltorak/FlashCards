@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.URL;
 
+import static pl.edu.pw.ee.flashcards.SceneSettings.ICON;
+import static pl.edu.pw.ee.flashcards.SceneSettings.STYLE;
+
 public class SceneSwitcher {
     private SceneSwitcher(){}
 
@@ -18,7 +21,11 @@ public class SceneSwitcher {
         Parent root = FXMLLoader.load(sceneUrl);
         var stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         var scene = new Scene(root);
+
+        scene.getStylesheets().add(STYLE.getPath());
+        stage.getIcons().add(ICON.getImage());
         stage.setScene(scene);
+
         stage.show();
     }
 }
