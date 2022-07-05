@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static pl.edu.pw.ee.flashcards.FxmlUrls.MAIN;
-import static pl.edu.pw.ee.flashcards.SceneSettings.ICON;
-import static pl.edu.pw.ee.flashcards.SceneSettings.STYLE;
+import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
+import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
+import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
 public class FlashCard extends Application {
     @Override

@@ -1,26 +1,31 @@
-package pl.edu.pw.ee.flashcards;
+package pl.edu.pw.ee.flashcards.manageset;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
+import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static pl.edu.pw.ee.flashcards.FxmlUrls.MAIN;
+import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
 
-public class SaveController implements Initializable {
+public class ManageController implements Initializable {
     @FXML
     private Button returnButton;
     @FXML
-    private Button addButton;
+    private Button editName;
     @FXML
-    private TextField foreignName;
+    private Button createSet;
     @FXML
-    private TextField nativeName;
+    private Button removeButton;
+    @FXML
+    private TextField setNameField;
+    @FXML
+    private TextField editNameField;
     @FXML
     private TreeView<String> flashCardsTree;
 

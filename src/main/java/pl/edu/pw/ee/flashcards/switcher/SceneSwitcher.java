@@ -1,4 +1,4 @@
-package pl.edu.pw.ee.flashcards;
+package pl.edu.pw.ee.flashcards.switcher;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.URL;
 
-import static pl.edu.pw.ee.flashcards.SceneSettings.ICON;
-import static pl.edu.pw.ee.flashcards.SceneSettings.STYLE;
+import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
+import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
 public class SceneSwitcher {
     private SceneSwitcher(){}

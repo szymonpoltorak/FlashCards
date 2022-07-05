@@ -1,12 +1,13 @@
-package pl.edu.pw.ee.flashcards;
+package pl.edu.pw.ee.flashcards.switcher;
 
 import javafx.scene.image.Image;
+import pl.edu.pw.ee.flashcards.FlashCard;
 
 import java.util.Objects;
 
 public enum SceneSettings {
-    STYLE(Objects.requireNonNull(SceneSettings.class.getResource("css/style.css")).toExternalForm()),
-    ICON(new Image(Objects.requireNonNull(SceneSettings.class.getResource("images/icon.png")).toExternalForm()));
+    STYLE(Objects.requireNonNull(FlashCard.class.getResource("css/style.css")).toExternalForm()),
+    ICON(new Image(Objects.requireNonNull(FlashCard.class.getResource("images/icon.png")).toExternalForm()));
 
     private String path;
     private Image image;

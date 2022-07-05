@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.ManageController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.manageset.ManageController">
    <children>
       <Label layoutX="37.0" layoutY="78.0" prefHeight="86.0" prefWidth="277.0" text="FlashCards Sets" />
       <ScrollPane layoutX="37.0" layoutY="138.0" prefHeight="420.0" prefWidth="340.0">
