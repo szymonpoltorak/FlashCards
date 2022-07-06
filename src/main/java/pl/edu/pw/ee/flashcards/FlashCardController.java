@@ -3,6 +3,8 @@ package pl.edu.pw.ee.flashcards;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 
 import java.io.IOException;
@@ -19,6 +21,7 @@ public class FlashCardController implements Initializable {
     private Button learnButton;
     @FXML
     private Button manageSetButton;
+    private static final Logger logger = LoggerFactory.getLogger(FlashCardController.class);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -26,8 +29,7 @@ public class FlashCardController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(SAVE.getPath(), event);
             } catch (IOException e) {
-                System.err.println("IOException");
-                e.printStackTrace();
+                logger.warn("IOException occured");
             }
         });
 
@@ -35,8 +37,7 @@ public class FlashCardController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(MANAGE.getPath(), event);
             } catch (IOException e) {
-                System.err.println("IOException");
-                e.printStackTrace();
+                logger.warn("IOException occured");
             }
         });
     }
