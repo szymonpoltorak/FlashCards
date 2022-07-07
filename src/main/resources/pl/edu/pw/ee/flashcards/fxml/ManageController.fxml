@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.manageset.ManageController">
+   <children>
+      <Label layoutX="37.0" layoutY="78.0" prefHeight="86.0" prefWidth="277.0" text="FlashCards Sets" />
+      <ScrollPane layoutX="37.0" layoutY="138.0" prefHeight="420.0" prefWidth="340.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="340.0">
+               <children>
+                  <TreeView fx:id="flashCardsTree" prefHeight="420.0" prefWidth="340.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="removeButton" layoutX="444.0" layoutY="277.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Remove" />
+      <Button fx:id="createSet" layoutX="625.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="New Set" />
+      <TextField fx:id="setNameField" layoutX="625.0" layoutY="164.0" />
+      <Label layoutX="625.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="Set Name" />
+      <Button fx:id="editName" layoutX="444.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Edit" />
+      <TextField fx:id="editNameField" layoutX="445.0" layoutY="164.0" />
+      <Label layoutX="446.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="New Name" />
+      <Button fx:id="returnButton" layoutX="625.0" layoutY="277.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Return" />
+   </children>
+</AnchorPane>
