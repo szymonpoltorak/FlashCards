@@ -7,7 +7,8 @@
 * JDK 17.0.3 LTS (Language Level Java 11),
 * Apache Maven 3.8.1,
 * JUnit 5.8.2,
-* Lombok 1.18.24.
+* Lombok 1.18.24,
+* Logback 1.2.11.
 
 ## Icons
 
