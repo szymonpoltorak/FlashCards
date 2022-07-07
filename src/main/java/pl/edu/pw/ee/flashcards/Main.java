@@ -12,7 +12,7 @@ import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
-public class FlashCard extends Application {
+public class Main extends Application {
     @Override
     public void start(@NotNull Stage stage) throws IOException {
         var scene = new Scene(FXMLLoader.load(MAIN.getPath()));

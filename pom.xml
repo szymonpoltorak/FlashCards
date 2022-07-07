@@ -124,7 +124,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pl.edu.pw.ee.flashcards/pl.edu.pw.ee.flashcards.FlashCard</mainClass>
+                            <mainClass>pl.edu.pw.ee.flashcards/pl.edu.pw.ee.flashcards.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

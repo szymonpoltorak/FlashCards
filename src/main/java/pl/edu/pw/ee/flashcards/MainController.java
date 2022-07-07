@@ -14,14 +14,14 @@ import java.util.ResourceBundle;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MANAGE;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.SAVE;
 
-public class FlashCardController implements Initializable {
+public class MainController implements Initializable {
     @FXML
     private Button addButton;
     @FXML
     private Button learnButton;
     @FXML
     private Button manageSetButton;
-    private static final Logger logger = LoggerFactory.getLogger(FlashCardController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
