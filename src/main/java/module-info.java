@@ -9,6 +9,9 @@ module pl.edu.pw.ee.flashcards {
     opens pl.edu.pw.ee.flashcards to javafx.fxml;
     exports pl.edu.pw.ee.flashcards;
 
+    opens pl.edu.pw.ee.flashcards.learn to javafx.fxml;
+    exports pl.edu.pw.ee.flashcards.learn;
+
     exports pl.edu.pw.ee.flashcards.switcher;
     opens pl.edu.pw.ee.flashcards.switcher to javafx.fxml;
 

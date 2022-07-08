@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MANAGE;
-import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.SAVE;
+import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.*;
 
 public class MainController implements Initializable {
     @FXML
@@ -29,7 +28,7 @@ public class MainController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(SAVE.getPath(), event);
             } catch (IOException e) {
-                logger.warn("IOException occured");
+                logger.error("IOException occured");
             }
         });
 
@@ -37,7 +36,16 @@ public class MainController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(MANAGE.getPath(), event);
             } catch (IOException e) {
-                logger.warn("IOException occured");
+                logger.error("IOException occured");
+            }
+        });
+
+        learnButton.setOnAction(event -> {
+            try {
+                SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
+            } catch (IOException e) {
+                logger.error("IOException occured");
+                e.printStackTrace();
             }
         });
     }
