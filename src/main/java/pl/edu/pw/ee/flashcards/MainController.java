@@ -28,7 +28,7 @@ public class MainController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(SAVE.getPath(), event);
             } catch (IOException e) {
-                logger.error("IOException occured");
+                logger.error("IOException occurred");
             }
         });
 
@@ -36,7 +36,7 @@ public class MainController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(MANAGE.getPath(), event);
             } catch (IOException e) {
-                logger.error("IOException occured");
+                logger.error("IOException occurred");
             }
         });
 
@@ -44,7 +44,7 @@ public class MainController implements Initializable {
             try {
                 SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
             } catch (IOException e) {
-                logger.error("IOException occured");
+                logger.error("IOException occurred");
                 e.printStackTrace();
             }
         });
