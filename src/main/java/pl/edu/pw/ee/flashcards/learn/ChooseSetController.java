@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
@@ -23,7 +23,9 @@ public class ChooseSetController implements Initializable {
     @FXML
     private ListView<String> setList;
     @FXML
-    private ScrollPane scrollPane;
+    private TextField numberCardField;
+    @FXML
+    private Button saveNumberButton;
     private static final Logger logger = LoggerFactory.getLogger(ChooseSetController.class);
 
     @Override
