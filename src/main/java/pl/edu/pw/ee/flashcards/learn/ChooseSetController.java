@@ -5,11 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,16 +23,9 @@ public class ChooseSetController implements Initializable {
     private TextField numberCardField;
     @FXML
     private Button saveNumberButton;
-    private static final Logger logger = LoggerFactory.getLogger(ChooseSetController.class);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        returnButton.setOnAction(event -> {
-            try {
-                SceneSwitcher.switchToNewScene(MAIN.getPath(), event);
-            } catch (IOException e) {
-                logger.error("IOException occured");
-            }
-        });
+        returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
     }
 }

@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,13 +26,6 @@ public class SaveController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        returnButton.setOnAction(event -> {
-            try {
-                SceneSwitcher.switchToNewScene(MAIN.getPath(), event);
-            } catch (IOException e) {
-                System.err.println("IOException");
-                e.printStackTrace();
-            }
-        });
+        returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
     }
 }
