@@ -38,11 +38,8 @@ public class SaveController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
-
         flashCardsTree.setRoot(new TreeItem<>("Root"));
-
-        flashSets = CardsReader.readFlashSets(Objects.requireNonNull(connection));
-        CardsReader.readFlashCardsList(Objects.requireNonNull(flashSets), flashCardsTree);
+        reloadView();
 
         returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
 
@@ -83,8 +80,7 @@ public class SaveController implements Initializable {
 
         if (!isThisFlashCard(selectedItem)){
             try (var statement = connection.createStatement()){
-                var name = selectedItem.getValue();
-                statement.executeUpdate("DELETE FROM FLASHCARD WHERE `native_name` LIKE '" + name + "'");
+                statement.executeUpdate("DELETE FROM FLASHCARD WHERE `native_name` LIKE '" + selectedItem.getValue() + "'");
                 return true;
             } catch (SQLException exception) {
                 logger.error("There is problem with deleting values.", exception);
