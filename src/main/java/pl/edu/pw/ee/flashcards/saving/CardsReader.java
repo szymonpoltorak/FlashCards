@@ -49,12 +49,17 @@ public class CardsReader {
         return null;
     }
 
-    public static @NotNull TreeView<String> readFlashCardsList(List<FlashSet> flashSets){
-        var flashCardList = new TreeView<String>();
-
-        flashCardList.setRoot(new TreeItem<>("Root"));
+    public static void readFlashCardsList(@NotNull List<FlashSet> flashSets, @NotNull TreeView<String> flashCardList){
+        flashCardList.getRoot().getChildren().clear();
         flashCardList.setShowRoot(false);
 
-        return flashCardList;
+        for (FlashSet flashSet : flashSets){
+            var set = new TreeItem<>(flashSet.getSetName());
+
+            for (FlashCard flashCard : flashSet.getFlashcards()){
+                set.getChildren().add(new TreeItem<>(flashCard.getNativeName()));
+            }
+            flashCardList.getRoot().getChildren().add(set);
+        }
     }
 }

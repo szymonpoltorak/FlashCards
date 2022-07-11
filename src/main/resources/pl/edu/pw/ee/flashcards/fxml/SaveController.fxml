@@ -14,7 +14,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="406.0" prefWidth="297.0">
                <children>
-                  <TreeView fx:id="flashCardsTree" layoutY="3.0" prefHeight="406.0" prefWidth="297.0" />
+                  <TreeView fx:id="flashCardsTree" prefHeight="406.0" prefWidth="297.0" />
                </children>
           </AnchorPane>
         </content>
