@@ -23,6 +23,12 @@ public class FlashSet {
         flashcards.add(flashCard);
     }
 
+    public FlashCard findGivenFlashCard(String flashCardName){
+
+
+        return null;
+    }
+
     @Override
     public String toString(){
         var builder = new StringBuilder();
