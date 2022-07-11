@@ -23,10 +23,13 @@ public class FlashSet {
         flashcards.add(flashCard);
     }
 
-    public FlashCard findGivenFlashCard(String flashCardName){
-
-
-        return null;
+    public boolean hasSuchFlashCard(String name){
+        for (FlashCard flashCard : flashcards){
+            if (flashCard.getNativeName().equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

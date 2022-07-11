@@ -1,4 +1,4 @@
-package pl.edu.pw.ee.flashcards.utils;
+package pl.edu.pw.ee.flashcards.manageset;
 
 import javafx.scene.control.Alert;
 

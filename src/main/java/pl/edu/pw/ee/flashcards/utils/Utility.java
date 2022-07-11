@@ -26,4 +26,13 @@ public class Utility {
         }
         return false;
     }
+
+    public static boolean isThereSuchFlashCard(String name, @NotNull List<FlashSet> flashSets){
+        for (FlashSet flashSet : flashSets){
+            if (flashSet.hasSuchFlashCard(name)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

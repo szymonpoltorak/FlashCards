@@ -23,7 +23,7 @@
       <Button fx:id="createSet" layoutX="625.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="New Set" />
       <TextField fx:id="setNameField" layoutX="625.0" layoutY="164.0" />
       <Label layoutX="625.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="Set Name" />
-      <Button fx:id="editName" layoutX="444.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Edit" />
+      <Button fx:id="editButton" layoutX="444.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Edit" />
       <TextField fx:id="editNameField" layoutX="445.0" layoutY="164.0" />
       <Label layoutX="446.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="New Name" />
       <Button fx:id="returnButton" layoutX="625.0" layoutY="511.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Return" />

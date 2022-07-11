@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
-import pl.edu.pw.ee.flashcards.utils.SaveAlerts;
 import pl.edu.pw.ee.flashcards.utils.Utility;
 
 import java.net.URL;
