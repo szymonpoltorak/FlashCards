@@ -1,10 +1,13 @@
 module pl.edu.pw.ee.flashcards {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires org.jetbrains.annotations;
     requires logback.core;
     requires org.slf4j;
+    requires mysql.connector.java;
     requires static lombok;
+    requires java.sql;
 
     opens pl.edu.pw.ee.flashcards to javafx.fxml;
     exports pl.edu.pw.ee.flashcards;
@@ -20,4 +23,6 @@ module pl.edu.pw.ee.flashcards {
 
     exports pl.edu.pw.ee.flashcards.saving;
     opens pl.edu.pw.ee.flashcards.saving to javafx.fxml;
+
+    exports pl.edu.pw.ee.flashcards.database;
 }

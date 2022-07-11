@@ -14,6 +14,29 @@ This app lets you create your own flashcards, sort them into sets and of course 
 * Logback 1.2.11,
 * MySQL.
 
+## Missing Enum Class
+
+There is a missing Enum called `SQLSettings`. This is where you need to paste your own `mysql` settings.
+
+* Create enum `SQLSettings` in `main.src.java.pl.edu.pw.ee.flashcards.database`,
+* Use following pattern:
+
+```java
+public enum SQLSettings {
+    URL("Your url"), USER("Your user"), PASSWORD("Your password");
+
+    private final String string;
+
+    SQLSettings(String string){
+        this.string = string;
+    }
+
+    public String getString() {
+        return string;
+    }
+}
+```
+
 ## Icons
 
 Icons I used are not my property, and I do not claim the ownership of them.

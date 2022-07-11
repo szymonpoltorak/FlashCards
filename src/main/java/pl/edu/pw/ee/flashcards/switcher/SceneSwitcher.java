@@ -32,8 +32,8 @@ public class SceneSwitcher {
             stage.setScene(scene);
 
             stage.show();
-        } catch (IOException e){
-            logger.error(e.getMessage());
+        } catch (IOException exception){
+            logger.error("There is problem with URL to the scene.", exception);
         }
     }
 }
