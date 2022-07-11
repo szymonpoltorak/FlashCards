@@ -19,6 +19,7 @@ public class Main extends Application {
 
         stage.setTitle("FlashCards");
         scene.getStylesheets().add(STYLE.getPath());
+        stage.setResizable(false);
         stage.getIcons().add(ICON.getImage());
         stage.setScene(scene);
 

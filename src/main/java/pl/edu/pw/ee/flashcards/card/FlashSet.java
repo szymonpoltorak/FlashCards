@@ -1,28 +1,37 @@
 package pl.edu.pw.ee.flashcards.card;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
-@ToString
+@Getter
 @EqualsAndHashCode
 public class FlashSet {
-    private final HashMap<Integer, FlashCard> set;
+    private final String setName;
+    private final ArrayList<FlashCard> flashcards;
 
-    public FlashSet() {
-        this.set = new HashMap<>();
+    public FlashSet(String setName){
+        this.setName = setName;
+        this.flashcards = new ArrayList<>();
     }
 
-    public void addCardToSet(FlashCard card){
-        this.set.put(card.getId(), card);
+    public void addNewFlashCard(FlashCard flashCard){
+        if (flashcards.contains(flashCard)){
+            return;
+        }
+        flashcards.add(flashCard);
     }
 
-    public FlashCard getCardFromSet(int id){
-        return set.get(id);
-    }
+    @Override
+    public String toString(){
+        var builder = new StringBuilder();
 
-    public void removeCardFromSet(int id){
-        set.remove(id);
+        builder.append("\nSetName : ").append(setName).append(";\n");
+
+        for (FlashCard flashCard : flashcards){
+            builder.append(flashCard.toString());
+        }
+        return builder.toString();
     }
 }

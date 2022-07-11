@@ -30,10 +30,11 @@ public class SceneSwitcher {
             scene.getStylesheets().add(STYLE.getPath());
             stage.getIcons().add(ICON.getImage());
             stage.setScene(scene);
+            stage.setResizable(false);
 
             stage.show();
-        } catch (IOException e){
-            logger.error(e.getMessage());
+        } catch (IOException exception){
+            logger.error("There is problem with URL to the scene.", exception);
         }
     }
 }
