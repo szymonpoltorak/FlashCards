@@ -22,6 +22,10 @@ public class Main extends Application {
         stage.getIcons().add(ICON.getImage());
         stage.setScene(scene);
 
+        //TODO: DELETE THESE DEBUG COMMENTS
+        //var connect = new Connector();
+        //var connection = connect.establishConnection();
+        //System.out.println(CardsReader.readFlashSets(connection));
         stage.show();
     }
 

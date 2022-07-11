@@ -25,4 +25,5 @@ module pl.edu.pw.ee.flashcards {
     opens pl.edu.pw.ee.flashcards.saving to javafx.fxml;
 
     exports pl.edu.pw.ee.flashcards.database;
+    exports pl.edu.pw.ee.flashcards.card;
 }

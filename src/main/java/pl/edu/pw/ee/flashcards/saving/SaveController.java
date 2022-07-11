@@ -26,6 +26,12 @@ public class SaveController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
         returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
+
+        addButton.setOnAction(event -> {
+
+        });
     }
 }
