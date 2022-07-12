@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.edu.pw.ee.flashcards.card.FlashCard;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
@@ -14,6 +13,7 @@ import pl.edu.pw.ee.flashcards.utils.Utility;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -123,32 +123,10 @@ public class ManageController implements Initializable {
 
         try (var statement = connection.createStatement()){
             if (Utility.isThereSuchElement(selectedName, flashSets)){
-                var flashSet = getProperFlashSet(selectedName);
-
-                if (flashSet.getFlashcards().isEmpty()){
-                    statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
-                }
-                else {
-                    statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + newName + "')");
-                    for (FlashCard flashCard : flashSet.getFlashcards()){
-                        statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
-                    }
-                    statement.executeUpdate("DELETE FROM CARDSET WHERE `set_name` LIKE '" + selectedName + "'");
-                }
+                editFlashSetsName(selectedName, newName, statement);
             }
             else if (Utility.isThereSuchFlashCard(selectedName, flashSets)){
-                var dialog = new TextInputDialog();
-                dialog.setTitle("Need more intel");
-                dialog.setContentText("Please give me a foreign name you want to edit. Leave free space to not change");
-                var result = dialog.showAndWait();
-
-                if (result.isPresent() && !result.get().equals("")){
-                    statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName +
-                            "', `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "'");
-                }
-                else {
-                    statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName + "' WHERE `native_name` LIKE '" + selectedName + "'");
-                }
+                editFlashCardsName(statement, newName, selectedName);
             }
             return true;
         } catch (SQLException exception) {
@@ -181,5 +159,33 @@ public class ManageController implements Initializable {
             }
         }
         return null;
+    }
+
+    public void editFlashSetsName(String selectedName, String newName, Statement statement) throws SQLException{
+        var flashSet = getProperFlashSet(selectedName);
+
+        if (flashSet.getFlashcards().isEmpty()){
+            statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
+        }
+        else {
+            statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + newName + "')");
+            statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
+            statement.executeUpdate("DELETE FROM CARDSET WHERE `set_name` LIKE '" + selectedName + "'");
+        }
+    }
+
+    public void editFlashCardsName(Statement statement, String newName, String selectedName) throws SQLException{
+        var dialog = new TextInputDialog();
+        dialog.setTitle("Need more intel");
+        dialog.setContentText("Please give me a foreign name you want to edit. Leave free space to not change");
+        var result = dialog.showAndWait();
+
+        if (result.isPresent() && !result.get().equals("")){
+            statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName +
+                    "', `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "'");
+        }
+        else {
+            statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName + "' WHERE `native_name` LIKE '" + selectedName + "'");
+        }
     }
 }
