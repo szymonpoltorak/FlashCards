@@ -26,4 +26,6 @@ module pl.edu.pw.ee.flashcards {
 
     exports pl.edu.pw.ee.flashcards.database;
     exports pl.edu.pw.ee.flashcards.card;
+    exports pl.edu.pw.ee.flashcards.utils;
+    opens pl.edu.pw.ee.flashcards.utils to javafx.fxml;
 }
