@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.edu.pw.ee.flashcards.card.FlashCard;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
@@ -65,6 +66,12 @@ public class ManageController implements Initializable {
             }
         });
 
+        moveButton.setOnAction(event -> {
+            if (moveElement()){
+                flashSets = Utility.reloadView(connection, flashCardsTree);
+            }
+        });
+
         returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
     }
 
@@ -73,6 +80,7 @@ public class ManageController implements Initializable {
 
         if (Utility.isThereSuchElement(name, flashSets)){
             ManageAlerts.popSameCardSetAlert();
+            logger.error("There is such cardSet already");
             return false;
         }
 
@@ -90,6 +98,7 @@ public class ManageController implements Initializable {
 
         if (!Utility.isThereSuchElement(selectedItem.getValue(), flashSets)){
             ManageAlerts.popNoSuchCardSetAlert();
+            logger.error("There is no such card set.");
             return false;
         }
 
@@ -108,13 +117,24 @@ public class ManageController implements Initializable {
         var selectedName = selectedItem.getValue();
 
         if (newName == null){
+            logger.info("New name is null.");
             return false;
         }
 
         try (var statement = connection.createStatement()){
             if (Utility.isThereSuchElement(selectedName, flashSets)){
-                statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
-                return true;
+                var flashSet = getProperFlashSet(selectedName);
+
+                if (flashSet.getFlashcards().isEmpty()){
+                    statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
+                }
+                else {
+                    statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + newName + "')");
+                    for (FlashCard flashCard : flashSet.getFlashcards()){
+                        statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
+                    }
+                    statement.executeUpdate("DELETE FROM CARDSET WHERE `set_name` LIKE '" + selectedName + "'");
+                }
             }
             else if (Utility.isThereSuchFlashCard(selectedName, flashSets)){
                 var dialog = new TextInputDialog();
@@ -122,19 +142,44 @@ public class ManageController implements Initializable {
                 dialog.setContentText("Please give me a foreign name you want to edit. Leave free space to not change");
                 var result = dialog.showAndWait();
 
-
                 if (result.isPresent() && !result.get().equals("")){
                     statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName +
-                            "', SET `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "'");
+                            "', `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "'");
                 }
                 else {
                     statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName + "' WHERE `native_name` LIKE '" + selectedName + "'");
                 }
-                return true;
             }
+            return true;
         } catch (SQLException exception) {
             logger.error("There is problem with editing names.", exception);
         }
         return false;
+    }
+
+    public boolean moveElement(){
+        var newSetName = moveField.getText();
+        var selectedItem = flashCardsTree.getSelectionModel().getSelectedItem();
+
+        if (!Utility.isThereSuchElement(newSetName, flashSets) || Utility.isThereSuchFlashCard(newSetName, flashSets)){
+            logger.error("There is no such flashSet or this is flashcard");
+            return false;
+        }
+
+        try (var statement = connection.createStatement()){
+            statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newSetName + "' WHERE `native_name` LIKE '" + selectedItem.getValue() + "'");
+        } catch (SQLException exception) {
+            logger.error("There is problem with moving flashcard to another set.", exception);
+        }
+        return true;
+    }
+
+    public FlashSet getProperFlashSet(String name){
+        for (FlashSet flashSet : flashSets){
+            if (flashSet.getSetName().equals(name)){
+                return flashSet;
+            }
+        }
+        return null;
     }
 }

@@ -63,6 +63,7 @@ public class SaveController implements Initializable {
 
             if (Utility.isThereSuchElement(motherName, flashSets)){
                 SaveAlerts.popSameFlashCardAlert();
+                logger.error("There is such flashcard already.");
                 return false;
             }
 
@@ -80,6 +81,7 @@ public class SaveController implements Initializable {
 
         if (Utility.isThereSuchElement(selectedItem.getValue(), flashSets)) {
             SaveAlerts.popDeleteSetAlert();
+            logger.error("Sets should not be deleted here.");
             return false;
         }
         try (var statement = connection.createStatement()){
