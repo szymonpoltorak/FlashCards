@@ -13,6 +13,7 @@ import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.manageset.ManageController;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 import pl.edu.pw.ee.flashcards.utils.CardsReader;
+import pl.edu.pw.ee.flashcards.utils.DbUtils;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -65,13 +66,16 @@ public class ChooseSetController implements Initializable {
         });
 
         letsLearnButton.setOnAction(event -> {
-            deleteLearnSetData();
-            prepareDataBaseTable();
+            DbUtils.deleteLearnSetData(connection);
+            if (!prepareDataBaseTable()){
+                return;
+            }
+            SceneSwitcher.switchToRandomScene(random.nextInt(1) + 1, event);
         });
 
         returnButton.setOnAction(event -> {
             SceneSwitcher.switchToNewScene(MAIN.getPath(), event);
-            deleteLearnSetData();
+            DbUtils.deleteLearnSetData(connection);
         });
     }
 
@@ -83,21 +87,13 @@ public class ChooseSetController implements Initializable {
         }
     }
 
-    public void deleteLearnSetData(){
-        try(var statement = connection.createStatement()){
-            statement.execute("DELETE FROM LEARNSET");
-        } catch (SQLException exception) {
-            logger.error("There is problem in deleting learnSet table.", exception);
-        }
-    }
-
-    public void prepareDataBaseTable(){
+    public boolean prepareDataBaseTable(){
         try (var statement = connection.createStatement()){
             var set = ManageController.getProperFlashSet(setList.getSelectionModel().getSelectedItem(), flashSets);
 
             if (set == null){
                 logger.error("Set is null.");
-                return;
+                return false;
             }
             numberOfCards = numberOfCards == 0 ? set.getFlashcards().size() : numberOfCards;
 
@@ -111,9 +107,11 @@ public class ChooseSetController implements Initializable {
                     numberOfCards--;
                 }
             }
+            return true;
         } catch (SQLException exception) {
             logger.error("There is a problem with creating", exception);
         }
+        return false;
     }
 
     public boolean wasThereDuplicate(@NotNull ResultSet result, int id) throws SQLException{

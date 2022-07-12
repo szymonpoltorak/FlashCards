@@ -13,11 +13,14 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 
+import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CLICK;
+import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.INSERT;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
 public class SceneSwitcher {
     private static final Logger logger = LoggerFactory.getLogger(SceneSwitcher.class);
+    private static final int INSERT_RANDOM = 1;
 
     private SceneSwitcher(){}
 
@@ -36,5 +39,11 @@ public class SceneSwitcher {
         } catch (IOException exception){
             logger.error("There is problem with URL to the scene.", exception);
         }
+    }
+
+    public static void switchToRandomScene(int id, ActionEvent event){
+        var url = id == INSERT_RANDOM ? INSERT.getPath() : CLICK.getPath();
+
+        SceneSwitcher.switchToNewScene(url, event);
     }
 }
