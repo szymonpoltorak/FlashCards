@@ -12,9 +12,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import static pl.edu.pw.ee.flashcards.database.TablesSQL.*;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.*;
-import static pl.edu.pw.ee.flashcards.utils.TablesSQL.CARDSET;
-import static pl.edu.pw.ee.flashcards.utils.TablesSQL.FLASHCARD;
 
 public class MainController implements Initializable {
     @FXML
@@ -45,6 +44,7 @@ public class MainController implements Initializable {
             try (var statement = connector.createStatement()){
                 statement.execute(FLASHCARD.getSql());
                 statement.execute(CARDSET.getSql());
+                statement.execute(LEARNSET.getSql());
             }
         } catch (SQLException exception) {
             logger.error("There is a problem with creating necessary tables.", exception);

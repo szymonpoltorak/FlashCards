@@ -5,8 +5,8 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 
-@Getter
 @EqualsAndHashCode
+@Getter
 public class FlashSet {
     private final String setName;
     private final ArrayList<FlashCard> flashcards;

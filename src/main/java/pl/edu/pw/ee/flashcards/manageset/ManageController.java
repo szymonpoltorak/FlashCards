@@ -3,6 +3,8 @@ package pl.edu.pw.ee.flashcards.manageset;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
@@ -152,7 +154,7 @@ public class ManageController implements Initializable {
         return true;
     }
 
-    public FlashSet getProperFlashSet(String name){
+    public static @Nullable FlashSet getProperFlashSet(String name, @NotNull List<FlashSet> flashSets){
         for (FlashSet flashSet : flashSets){
             if (flashSet.getSetName().equals(name)){
                 return flashSet;
@@ -162,7 +164,12 @@ public class ManageController implements Initializable {
     }
 
     public void editFlashSetsName(String selectedName, String newName, Statement statement) throws SQLException{
-        var flashSet = getProperFlashSet(selectedName);
+        var flashSet = getProperFlashSet(selectedName, flashSets);
+
+        if (flashSet == null){
+            logger.error("flashSet is null");
+            return;
+        }
 
         if (flashSet.getFlashcards().isEmpty()){
             statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
