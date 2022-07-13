@@ -18,7 +18,7 @@ import java.sql.Connection;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import static pl.edu.pw.ee.flashcards.learn.Constant.RAND_BOUND;
+import static pl.edu.pw.ee.flashcards.learn.SwitchData.*;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CHOOSE;
 
 public class ClickAnswerController implements Initializable {
@@ -55,7 +55,14 @@ public class ClickAnswerController implements Initializable {
         });
 
         submitButton.setOnAction(event -> {
-            SceneSwitcher.switchToRandomScene(random.nextInt(RAND_BOUND) ,event);
+            var destination = random.nextInt(RAND_BOUND.getValue());
+
+            if (destination == CLICK_DESTINATION.getValue()){
+                initialize(location, resources);
+            }
+            else {
+                SceneSwitcher.switchToRandomScene(INSERT_DESTINATION.getValue(), event);
+            }
         });
     }
 }

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 
+import static pl.edu.pw.ee.flashcards.learn.SwitchData.INSERT_DESTINATION;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CLICK;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.INSERT;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
@@ -20,7 +21,6 @@ import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
 public class SceneSwitcher {
     private static final Logger logger = LoggerFactory.getLogger(SceneSwitcher.class);
-    private static final int INSERT_RANDOM = 1;
 
     private SceneSwitcher(){}
 
@@ -42,6 +42,6 @@ public class SceneSwitcher {
     }
 
     public static void switchToRandomScene(int id, ActionEvent event){
-        SceneSwitcher.switchToNewScene(id == INSERT_RANDOM ? INSERT.getPath() : CLICK.getPath(), event);
+        SceneSwitcher.switchToNewScene(id == INSERT_DESTINATION.getValue() ? INSERT.getPath() : CLICK.getPath(), event);
     }
 }

@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import static pl.edu.pw.ee.flashcards.learn.Constant.RAND_BOUND;
+import static pl.edu.pw.ee.flashcards.learn.SwitchData.RAND_BOUND;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
 
 public class ChooseSetController implements Initializable {
@@ -71,7 +71,7 @@ public class ChooseSetController implements Initializable {
             if (!prepareDataBaseTable()){
                 return;
             }
-            SceneSwitcher.switchToRandomScene(random.nextInt(RAND_BOUND), event);
+            SceneSwitcher.switchToRandomScene(random.nextInt(RAND_BOUND.getValue()), event);
         });
 
         returnButton.setOnAction(event -> {
