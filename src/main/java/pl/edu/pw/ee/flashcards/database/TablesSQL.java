@@ -9,7 +9,6 @@ public enum TablesSQL {
             "    PRIMARY KEY (`card_id`),\n" +
             "    FOREIGN KEY (`set_name`) REFERENCES CARDSET(`set_name`)\n" +
             ") ENGINE=INNODB DEFAULT CHARSET=UTF8;"),
-
     CARDSET("CREATE TABLE IF NOT EXISTS CARDSET(\n" +
             "    `set_name`  VARCHAR(100)    NOT NULL,\n" +
             "    PRIMARY KEY (`set_name`)\n" +

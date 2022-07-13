@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+import pl.edu.pw.ee.flashcards.database.Connector;
+import pl.edu.pw.ee.flashcards.utils.DbUtils;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
 import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.ICON;
@@ -22,6 +25,7 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.getIcons().add(ICON.getImage());
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> DbUtils.deleteLearnSetData(Objects.requireNonNull(Connector.establishConnection())));
 
         stage.show();
     }

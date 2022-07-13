@@ -2,6 +2,7 @@ package pl.edu.pw.ee.flashcards.learn;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -69,6 +70,10 @@ public class ChooseSetController implements Initializable {
         letsLearnButton.setOnAction(event -> {
             DbUtils.deleteLearnSetData(connection);
             if (!prepareDataBaseTable()){
+                var alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Working error");
+                alert.setContentText("This is empty, you cannot learn from it!");
+                alert.showAndWait();
                 return;
             }
             SceneSwitcher.switchToRandomScene(random.nextInt(RAND_BOUND.getValue()), event);
@@ -92,8 +97,8 @@ public class ChooseSetController implements Initializable {
         try (var statement = connection.createStatement()){
             var set = ManageController.getProperFlashSet(setList.getSelectionModel().getSelectedItem(), flashSets);
 
-            if (set == null){
-                logger.error("Set is null.");
+            if (set == null || set.isEmpty()){
+                logger.error("Set is empty.");
                 return false;
             }
             numberOfCards = numberOfCards == 0 ? set.getFlashcards().size() : numberOfCards;

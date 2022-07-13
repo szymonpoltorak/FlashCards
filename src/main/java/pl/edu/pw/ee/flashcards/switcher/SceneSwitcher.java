@@ -9,9 +9,12 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.edu.pw.ee.flashcards.database.Connector;
+import pl.edu.pw.ee.flashcards.utils.DbUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 import static pl.edu.pw.ee.flashcards.learn.SwitchData.INSERT_DESTINATION;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CLICK;
@@ -34,6 +37,7 @@ public class SceneSwitcher {
             stage.getIcons().add(ICON.getImage());
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.setOnCloseRequest(closeEvent -> DbUtils.deleteLearnSetData(Objects.requireNonNull(Connector.establishConnection())));
 
             stage.show();
         } catch (IOException exception){

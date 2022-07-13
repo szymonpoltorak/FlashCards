@@ -58,8 +58,8 @@ public class SaveController implements Initializable {
 
     public boolean insertItemsToDataBase(){
         try (var statement = connection.createStatement()) {
-            var foreign = foreignName.getText();
-            var motherName = nativeName.getText();
+            var foreign = foreignName.getText().trim();
+            var motherName = nativeName.getText().trim();
 
             if (Utility.isThereSuchElement(motherName, flashSets)){
                 SaveAlerts.popSameFlashCardAlert();

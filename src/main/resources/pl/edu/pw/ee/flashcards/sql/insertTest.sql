@@ -14,3 +14,4 @@ INSERT INTO `FLASHCARD`(`native_name`, `foreign_name`, `set_name`) VALUES ('Czar
 
 INSERT INTO `FLASHCARD`(`native_name`, `foreign_name`, `set_name`) VALUES ('Policjant', 'Policeman', 'NotGrouped');
 INSERT INTO `FLASHCARD`(`native_name`, `foreign_name`, `set_name`) VALUES ('Drzewo', 'Tree', 'NotGrouped');
+INSERT INTO `FLASHCARD`(`native_name`, `foreign_name`, `set_name`) VALUES ('Szkoła', 'School', 'NotGrouped');

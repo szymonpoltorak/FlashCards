@@ -1,43 +1,28 @@
 package pl.edu.pw.ee.flashcards.learn;
 
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashCard;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
 
+@NoArgsConstructor
 public class CardChooser {
     private static final Logger logger = LoggerFactory.getLogger(CardChooser.class);
-    private Random random;
 
-    public CardChooser(Random random){
-        this.random = random;
-    }
+    public int getRandomId(@NotNull Statement statement) throws SQLException {
+        var resultSet = statement.executeQuery("SELECT `card_id` FROM LEARNSET WHERE learned = FALSE ORDER BY RAND() LIMIT 1");
+        int id = -1;
 
-    public int getMaxValue(@NotNull Statement statement) throws SQLException {
-        try {
-            int max = 0;
-            int min = 0;
-            var maxValueSet = statement.executeQuery("SELECT MAX(`card_id`) AS max, MIN(`card_id`) AS min FROM LEARNSET;");
-
-            while (maxValueSet.next()) {
-                min = maxValueSet.getInt("min");
-                max = maxValueSet.getInt("max");
-            }
-            random = SecureRandom.getInstanceStrong();
-
-            return random.nextInt(max - min) + min;
-        } catch (NoSuchAlgorithmException exception) {
-            logger.error("There is an error in creating Random class instance", exception);
+        while (resultSet.next()) {
+            id = resultSet.getInt("card_id");
         }
-        return -1;
+        return id;
     }
 
     public boolean isEveryCardLearn(@NotNull Connection connection){
@@ -48,7 +33,6 @@ public class CardChooser {
             while (resultSet.next()){
                 number = resultSet.getInt("LEARNED");
             }
-            System.out.println("Number : " + number);
             if (number == 0){
                 return true;
             }
@@ -66,7 +50,7 @@ public class CardChooser {
             var wasLearned = false;
 
             while (nativeName.equals("") || foreignName.equals("") || wasLearned) {
-                id = getMaxValue(statement);
+                id = getRandomId(statement);
                 var resultSet = statement.executeQuery("SELECT f.native_name, f.foreign_name, f.card_id, l.learned " +
                         " FROM LEARNSET l INNER JOIN FLASHCARD f ON (f.card_id = l.card_id) WHERE l.card_id = " + id + ";");
 

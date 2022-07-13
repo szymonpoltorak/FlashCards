@@ -32,6 +32,10 @@ public class FlashSet {
         return false;
     }
 
+    public boolean isEmpty(){
+        return flashcards.isEmpty();
+    }
+
     @Override
     public String toString(){
         var builder = new StringBuilder();
