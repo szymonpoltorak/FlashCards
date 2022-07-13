@@ -47,7 +47,7 @@ public class ClickAnswerController implements Initializable {
         connection = Connector.establishConnection();
         try {
             random = SecureRandom.getInstanceStrong();
-            cardChooser = new CardChooser(random);
+            cardChooser = new CardChooser();
         } catch (NoSuchAlgorithmException exception) {
             logger.error("There is a problem in creating random instance", exception);
         }

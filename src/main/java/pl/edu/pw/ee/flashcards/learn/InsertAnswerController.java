@@ -50,7 +50,7 @@ public class InsertAnswerController implements Initializable {
         } catch (NoSuchAlgorithmException exception) {
             logger.error("There is a problem in creating random instance.", exception);
         }
-        cardChooser = new CardChooser(random);
+        cardChooser = new CardChooser();
 
         exitButton.setOnAction(event -> {
             DbUtils.deleteLearnSetData(connection);
