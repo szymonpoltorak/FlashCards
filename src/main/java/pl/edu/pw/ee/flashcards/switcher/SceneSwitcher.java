@@ -42,8 +42,6 @@ public class SceneSwitcher {
     }
 
     public static void switchToRandomScene(int id, ActionEvent event){
-        var url = id == INSERT_RANDOM ? INSERT.getPath() : CLICK.getPath();
-
-        SceneSwitcher.switchToNewScene(url, event);
+        SceneSwitcher.switchToNewScene(id == INSERT_RANDOM ? INSERT.getPath() : CLICK.getPath(), event);
     }
 }

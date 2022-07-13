@@ -87,7 +87,7 @@ public class ManageController implements Initializable {
         }
 
         try (var statement = connection.createStatement()){
-            statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + name + "')");
+            statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + name + "');");
             return true;
         } catch (SQLException exception) {
             logger.error("There is problem with inserting new cardSet.", exception);
@@ -105,7 +105,7 @@ public class ManageController implements Initializable {
         }
 
         try (var statement = connection.createStatement()){
-            statement.executeUpdate("DELETE FROM CARDSET WHERE (`set_name` LIKE '" + selectedItem.getValue() + "')");
+            statement.executeUpdate("DELETE FROM CARDSET WHERE (`set_name` LIKE '" + selectedItem.getValue() + "');");
             return true;
         } catch (SQLException exception) {
             logger.error("There is problem with deleting cardSet.", exception);
@@ -172,12 +172,12 @@ public class ManageController implements Initializable {
         }
 
         if (flashSet.getFlashcards().isEmpty()){
-            statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
+            statement.executeUpdate("UPDATE CARDSET SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "';");
         }
         else {
-            statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + newName + "')");
-            statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "'");
-            statement.executeUpdate("DELETE FROM CARDSET WHERE `set_name` LIKE '" + selectedName + "'");
+            statement.execute("INSERT INTO CARDSET(`set_name`) VALUES ('" + newName + "');");
+            statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newName + "' WHERE `set_name` LIKE '" + selectedName + "';");
+            statement.executeUpdate("DELETE FROM CARDSET WHERE `set_name` LIKE '" + selectedName + "';");
         }
     }
 
@@ -189,10 +189,10 @@ public class ManageController implements Initializable {
 
         if (result.isPresent() && !result.get().equals("")){
             statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName +
-                    "', `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "'");
+                    "', `foreign_name` = '" + result.get() + "' WHERE `native_name` LIKE '" + selectedName + "';");
         }
         else {
-            statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName + "' WHERE `native_name` LIKE '" + selectedName + "'");
+            statement.executeUpdate("UPDATE FLASHCARD SET `native_name` = '" + newName + "' WHERE `native_name` LIKE '" + selectedName + "';");
         }
     }
 }

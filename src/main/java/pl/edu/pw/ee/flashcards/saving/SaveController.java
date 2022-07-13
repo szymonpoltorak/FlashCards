@@ -68,7 +68,7 @@ public class SaveController implements Initializable {
             }
 
             statement.execute("INSERT INTO FLASHCARD(`native_name`, `foreign_name`, `set_name`) VALUES ('" + motherName
-                    + "', '" + foreign + "', 'NotGrouped')");
+                    + "', '" + foreign + "', 'NotGrouped');");
             return true;
         } catch (SQLException exception) {
             logger.error("There is problem with inserting values.", exception);
@@ -85,7 +85,7 @@ public class SaveController implements Initializable {
             return false;
         }
         try (var statement = connection.createStatement()){
-            statement.executeUpdate("DELETE FROM FLASHCARD WHERE `native_name` LIKE '" + selectedItem.getValue() + "'");
+            statement.executeUpdate("DELETE FROM FLASHCARD WHERE `native_name` LIKE '" + selectedItem.getValue() + "';");
             return true;
         } catch (SQLException exception) {
             logger.error("There is problem with deleting values.", exception);

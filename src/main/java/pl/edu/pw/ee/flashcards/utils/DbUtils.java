@@ -14,7 +14,8 @@ public class DbUtils {
 
     public static void deleteLearnSetData(@NotNull Connection connection){
         try(var statement = connection.createStatement()){
-            statement.execute("DELETE FROM LEARNSET");
+            statement.execute("DELETE FROM LEARNSET;");
+            statement.execute("ALTER TABLE LEARNSET AUTO_INCREMENT = 1;");
         } catch (SQLException exception) {
             logger.error("There is problem in deleting learnSet table.", exception);
         }

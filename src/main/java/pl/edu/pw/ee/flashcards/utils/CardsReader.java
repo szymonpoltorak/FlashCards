@@ -25,14 +25,14 @@ public class CardsReader {
         try (var statement = connection.createStatement()) {
             var flashSets = new ArrayList<FlashSet>();
 
-            var resultSet = statement.executeQuery("SELECT * FROM CARDSET");
+            var resultSet = statement.executeQuery("SELECT * FROM CARDSET;");
 
             while (resultSet.next()) {
                 flashSets.add(new FlashSet(resultSet.getString("set_name")));
             }
 
             for (FlashSet flashSet : flashSets){
-                resultSet = statement.executeQuery("SELECT * FROM FLASHCARD WHERE `set_name` LIKE '" + flashSet.getSetName() + "'");
+                resultSet = statement.executeQuery("SELECT * FROM FLASHCARD WHERE `set_name` LIKE '" + flashSet.getSetName() + "';");
 
                 while (resultSet.next()){
                     var nativeName = resultSet.getString("native_name");

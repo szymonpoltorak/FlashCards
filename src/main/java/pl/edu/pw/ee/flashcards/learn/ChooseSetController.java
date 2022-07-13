@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import static pl.edu.pw.ee.flashcards.learn.Constant.RAND_BOUND;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.MAIN;
 
 public class ChooseSetController implements Initializable {
@@ -70,7 +71,7 @@ public class ChooseSetController implements Initializable {
             if (!prepareDataBaseTable()){
                 return;
             }
-            SceneSwitcher.switchToRandomScene(random.nextInt(1) + 1, event);
+            SceneSwitcher.switchToRandomScene(random.nextInt(RAND_BOUND), event);
         });
 
         returnButton.setOnAction(event -> {
@@ -100,10 +101,10 @@ public class ChooseSetController implements Initializable {
             while (numberOfCards > 0){
                 var card = random.nextInt(set.getFlashcards().size());
                 var id = set.getFlashcards().get(card).getId();
-                var result = statement.executeQuery("SELECT `card_id` FROM LEARNSET WHERE `card_id` = " + id);
+                var result = statement.executeQuery("SELECT `card_id` FROM LEARNSET WHERE `card_id` = " + id + ";");
 
                 if (!wasThereDuplicate(result, id)) {
-                    statement.execute("INSERT INTO LEARNSET(`card_id`) VALUES (" + id + ") ON DUPLICATE KEY UPDATE `card_id`=`card_id`");
+                    statement.execute("INSERT INTO LEARNSET(`card_id`) VALUES (" + id + ") ON DUPLICATE KEY UPDATE `card_id`=`card_id`;");
                     numberOfCards--;
                 }
             }
