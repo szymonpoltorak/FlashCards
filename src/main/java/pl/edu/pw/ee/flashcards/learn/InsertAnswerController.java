@@ -1,7 +1,9 @@
 package pl.edu.pw.ee.flashcards.learn;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,9 +18,11 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import static pl.edu.pw.ee.flashcards.learn.Language.NATIVE;
 import static pl.edu.pw.ee.flashcards.learn.SwitchData.*;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CHOOSE;
 
@@ -36,6 +40,7 @@ public class InsertAnswerController implements Initializable {
     private Random random;
     private CardChooser cardChooser;
     private FlashCard answerCard;
+    private int chosenLanguage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,24 +56,55 @@ public class InsertAnswerController implements Initializable {
             DbUtils.deleteLearnSetData(connection);
             SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
         });
-
+        chosenLanguage = random.nextInt(RAND_BOUND.getValue());
         answerCard = cardChooser.getCardFromSet(connection);
 
         if (answerCard == null){
             logger.error("Answer Card is null");
             return;
         }
-        wordLabel.setText(answerCard.getNativeName());
+        var word = chosenLanguage == NATIVE.getLangId() ? answerCard.getNativeName() : answerCard.getForeignName();
+        wordLabel.setText(word);
 
         submitAnswerButton.setOnAction(event -> {
-            var destination = random.nextInt(RAND_BOUND.getValue());
-
-            if (destination == INSERT_DESTINATION.getValue()){
-                initialize(location, resources);
-            }
-            else {
-                SceneSwitcher.switchToRandomScene(CLICK_DESTINATION.getValue(), event);
+            checkUsersAnswer();
+            if (cardChooser.isEveryCardLearn(connection)) {
+                DbUtils.deleteLearnSetData(connection);
+                SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
+            } else {
+                userAnswerField.clear();
+                decideWhereToSwitch(location, resources, event);
             }
         });
+    }
+
+    public void checkUsersAnswer(){
+        var userAnswer = userAnswerField.getText();
+        var answer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
+
+        if (!userAnswer.equals(answer)){
+            var alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Your answer");
+            alert.setContentText("Your answer was incorrect! Correct answer was " + answer);
+            alert.showAndWait();
+        }
+        else {
+            try (var statement = connection.createStatement()) {
+                statement.executeUpdate("UPDATE LEARNSET SET `learned` = TRUE WHERE `card_id` = " + answerCard.getId() + ";");
+            } catch (SQLException exception) {
+                logger.error("There is a problem with updating learned record in learnSet", exception);
+            }
+        }
+    }
+
+    public void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
+        var destination = random.nextInt(RAND_BOUND.getValue());
+
+        if (destination == INSERT_DESTINATION.getValue()){
+            initialize(location, resources);
+        }
+        else {
+            SceneSwitcher.switchToRandomScene(CLICK_DESTINATION.getValue(), event);
+        }
     }
 }

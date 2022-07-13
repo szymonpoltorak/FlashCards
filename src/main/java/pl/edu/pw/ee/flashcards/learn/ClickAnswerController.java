@@ -1,5 +1,6 @@
 package pl.edu.pw.ee.flashcards.learn;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ public class ClickAnswerController implements Initializable {
     private RadioButton answerD;
     private Connection connection;
     private Random random;
+    private CardChooser cardChooser;
     private static final Logger logger = LoggerFactory.getLogger(ClickAnswerController.class);
 
     @Override
@@ -45,6 +47,7 @@ public class ClickAnswerController implements Initializable {
         connection = Connector.establishConnection();
         try {
             random = SecureRandom.getInstanceStrong();
+            cardChooser = new CardChooser(random);
         } catch (NoSuchAlgorithmException exception) {
             logger.error("There is a problem in creating random instance", exception);
         }
@@ -55,14 +58,23 @@ public class ClickAnswerController implements Initializable {
         });
 
         submitButton.setOnAction(event -> {
-            var destination = random.nextInt(RAND_BOUND.getValue());
-
-            if (destination == CLICK_DESTINATION.getValue()){
-                initialize(location, resources);
-            }
-            else {
-                SceneSwitcher.switchToRandomScene(INSERT_DESTINATION.getValue(), event);
+            if (cardChooser.isEveryCardLearn(connection)) {
+                DbUtils.deleteLearnSetData(connection);
+                SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
+            } else {
+                decideWhereToSwitch(location, resources, event);
             }
         });
+    }
+
+    public void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
+        var destination = random.nextInt(RAND_BOUND.getValue());
+
+        if (destination == CLICK_DESTINATION.getValue()){
+            initialize(location, resources);
+        }
+        else {
+            SceneSwitcher.switchToRandomScene(INSERT_DESTINATION.getValue(), event);
+        }
     }
 }

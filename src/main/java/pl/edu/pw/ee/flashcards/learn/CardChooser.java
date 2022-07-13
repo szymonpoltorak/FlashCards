@@ -40,20 +40,40 @@ public class CardChooser {
         return -1;
     }
 
+    public boolean isEveryCardLearn(@NotNull Connection connection){
+        try (var statement = connection.createStatement()) {
+            var resultSet = statement.executeQuery("SELECT COUNT(*) AS LEARNED FROM LEARNSET WHERE learned = false");
+            int number = -1;
+
+            while (resultSet.next()){
+                number = resultSet.getInt("LEARNED");
+            }
+            System.out.println("Number : " + number);
+            if (number == 0){
+                return true;
+            }
+        } catch (SQLException exception) {
+            logger.error("There is a problem with selecting learned records from learnSet.", exception);
+        }
+        return false;
+    }
+
     public @Nullable FlashCard getCardFromSet(@NotNull Connection connection){
         try (var statement = connection.createStatement()){
             String nativeName = "";
             String foreignName = "";
             int id = 0;
+            var wasLearned = false;
 
-            while (nativeName.equals("") && foreignName.equals("")) {
+            while (nativeName.equals("") || foreignName.equals("") || wasLearned) {
                 id = getMaxValue(statement);
-                var resultSet = statement.executeQuery("SELECT f.native_name, f.foreign_name, f.card_id FROM LEARNSET l" +
-                        " INNER JOIN FLASHCARD f ON (f.card_id = l.card_id) WHERE l.card_id = " + id + ";");
+                var resultSet = statement.executeQuery("SELECT f.native_name, f.foreign_name, f.card_id, l.learned " +
+                        " FROM LEARNSET l INNER JOIN FLASHCARD f ON (f.card_id = l.card_id) WHERE l.card_id = " + id + ";");
 
                 while (resultSet.next()) {
                     nativeName = resultSet.getString("native_name");
                     foreignName = resultSet.getString("foreign_name");
+                    wasLearned = resultSet.getBoolean("learned");
                 }
             }
             return new FlashCard(nativeName, foreignName, id);
