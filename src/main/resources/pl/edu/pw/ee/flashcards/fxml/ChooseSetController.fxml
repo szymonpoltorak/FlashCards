@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.learn.ChooseSetController">
    <children>
-      <ScrollPane layoutX="14.0" layoutY="100.0" prefHeight="487.0" prefWidth="310.0">
+      <ScrollPane layoutX="40.0" layoutY="87.0" prefHeight="487.0" prefWidth="310.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="310.0">
                <children>
@@ -18,11 +18,11 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="letsLearnButton" layoutX="580.0" layoutY="397.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="121.0" text="Lets Learn!" />
-      <Button fx:id="returnButton" layoutX="580.0" layoutY="494.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="121.0" text="Return" />
-      <Label layoutX="17.0" layoutY="60.0" prefHeight="27.0" prefWidth="310.0" text="Choose Set To Learn From" />
-      <TextField fx:id="numberCardField" layoutX="520.0" layoutY="288.0" prefHeight="25.0" prefWidth="121.0" />
-      <Label layoutX="520.0" layoutY="249.0" prefHeight="25.0" prefWidth="250.0" text="Enter number of cards you want to learn" />
-      <Button fx:id="saveNumberButton" layoutX="645.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Save" />
+      <Button fx:id="letsLearnButton" layoutX="521.0" layoutY="344.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="121.0" text="Lets Learn!" />
+      <Button fx:id="returnButton" layoutX="521.0" layoutY="439.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="121.0" text="Return" />
+      <Label fx:id="chooseLabel" layoutX="40.0" layoutY="54.0" prefHeight="27.0" prefWidth="310.0" text="Choose Set To Learn From" />
+      <TextField fx:id="numberCardField" layoutX="460.0" layoutY="288.0" prefHeight="25.0" prefWidth="121.0" />
+      <Label layoutX="460.0" layoutY="252.0" prefHeight="25.0" prefWidth="250.0" text="Enter number of cards you want to learn" />
+      <Button fx:id="saveNumberButton" layoutX="585.0" layoutY="288.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Save" />
    </children>
 </AnchorPane>

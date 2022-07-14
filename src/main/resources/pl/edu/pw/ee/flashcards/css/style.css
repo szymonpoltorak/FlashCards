@@ -44,6 +44,14 @@
     -fx-background-image: url('../images/background_click.jpg');
 }
 
+#setList{
+    -fx-font-family: 'Ubuntu', sans-serif;
+}
+
+#chooseLabel {
+    -fx-font-size: 25px;
+}
+
 .button{
     -fx-font-family: 'Ubuntu', sans-serif;
     -fx-font-size: 15px;
