@@ -1,3 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 .label{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 13px;
+    -fx-alignment: center;
+    -fx-color: #05192E;
+}
+
+#mainLabel{
+    -fx-font-size: 45px;
+}
+
+#insertPane{
+    -fx-background-image: url('../images/background_insert.jpg');
+}
+
+#clickPane{
+    -fx-background-image: url('../images/background_click.jpg');
+}
+
+.button{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 15px;
+    -fx-color: #9FC7F3;
+}
+
+.button:hover{
+    -fx-color: #6691ec;
+}
+
+#mainPane{
+    -fx-background-image: url('../images/background_image.jpg');
+}
+
+.radio-button{
     -fx-alignment: center;
 }

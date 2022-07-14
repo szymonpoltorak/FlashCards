@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.learn.InsertAnswerController">
+<AnchorPane fx:id="insertPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.learn.InsertAnswerController">
    <children>
       <TextField fx:id="userAnswerField" layoutX="326.0" layoutY="275.0" />
       <Label fx:id="wordLabel" layoutX="326.0" layoutY="213.0" prefHeight="25.0" prefWidth="149.0" text="Label" />
