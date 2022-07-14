@@ -58,7 +58,11 @@ Author: [Freepik](https://www.flaticon.com/authors/freepik).
 
 * **CardSetIcon** \
 Source: [Flaticon.com](https://www.flaticon.com/free-icon/paper_2541988), \
-Author: [Freepik](https://www.flaticon.com/authors/freepik).
+Author: [Freepik](https://www.flaticon.com/authors/freepik), 
+
+* **BackGroundImage** \
+Source: [Freepik.com](https://www.freepik.com/free-vector/blue-fluid-background_16326494.htm#query=graphics&position=22&from_view=search), \
+Source: [rawpixel.com](https://www.freepik.com/author/rawpixel-com).
   
 ***
 ## ScreenShots

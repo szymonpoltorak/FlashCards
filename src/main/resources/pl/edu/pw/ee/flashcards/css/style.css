@@ -11,6 +11,31 @@
     -fx-font-size: 45px;
 }
 
+#nativeName{
+    -fx-background-color: azure;
+}
+
+#foreignName{
+    -fx-background-color: azure;
+}
+
+#scrollSave{
+    -fx-background-color: azure;
+}
+
+#anchorSave{
+    -fx-background-color: azure;
+}
+
+#flashLabel{
+    -fx-font-size: 25px;
+}
+
+#flashCardsTree{
+    -fx-background-color: azure;
+    -fx-font-family: 'Ubuntu', sans-serif;
+}
+
 #insertPane{
     -fx-background-image: url('../images/background_insert.jpg');
 }
