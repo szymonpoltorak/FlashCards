@@ -3,7 +3,6 @@ package pl.edu.pw.ee.flashcards.learn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,13 +11,13 @@ import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashCard;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
+import pl.edu.pw.ee.flashcards.utils.AnswerUtils;
 import pl.edu.pw.ee.flashcards.utils.DbUtils;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -26,7 +25,7 @@ import static pl.edu.pw.ee.flashcards.learn.Language.NATIVE;
 import static pl.edu.pw.ee.flashcards.learn.SwitchData.*;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CHOOSE;
 
-public class InsertAnswerController implements Initializable {
+public class InsertAnswerController implements Initializable, AnswerChecker {
     @FXML
     private TextField userAnswerField;
     @FXML
@@ -67,7 +66,7 @@ public class InsertAnswerController implements Initializable {
         wordLabel.setText(word);
 
         submitAnswerButton.setOnAction(event -> {
-            checkUsersAnswer();
+            checkUserAnswer();
             if (cardChooser.isEveryCardLearn(connection)) {
                 DbUtils.deleteLearnSetData(connection);
                 SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
@@ -78,23 +77,12 @@ public class InsertAnswerController implements Initializable {
         });
     }
 
-    public void checkUsersAnswer(){
+    @Override
+    public void checkUserAnswer(){
         var userAnswer = userAnswerField.getText();
-        var answer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
+        var correctAnswer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
 
-        if (!userAnswer.equals(answer)){
-            var alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Your answer");
-            alert.setContentText("Your answer was incorrect! Correct answer was " + answer);
-            alert.showAndWait();
-        }
-        else {
-            try (var statement = connection.createStatement()) {
-                statement.executeUpdate("UPDATE LEARNSET SET `learned` = TRUE WHERE `card_id` = " + answerCard.getId() + ";");
-            } catch (SQLException exception) {
-                logger.error("There is a problem with updating learned record in learnSet", exception);
-            }
-        }
+        AnswerUtils.handleAnswer(userAnswer, correctAnswer, connection, answerCard);
     }
 
     public void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){

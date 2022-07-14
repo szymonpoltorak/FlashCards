@@ -2,7 +2,6 @@ package pl.edu.pw.ee.flashcards.utils;
 
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ public class CardsReader {
 
     private CardsReader(){}
 
-    @Contract(pure = true)
     public static @Nullable List<FlashSet> readFlashSets(@NotNull Connection connection) {
         try (var statement = connection.createStatement()) {
             var flashSets = new ArrayList<FlashSet>();

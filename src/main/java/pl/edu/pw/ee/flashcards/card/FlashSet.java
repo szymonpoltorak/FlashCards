@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @EqualsAndHashCode
 @Getter
-public class FlashSet {
+public class FlashSet implements CardSet {
     private final String setName;
     private final ArrayList<FlashCard> flashcards;
 
@@ -16,6 +16,7 @@ public class FlashSet {
         this.flashcards = new ArrayList<>();
     }
 
+    @Override
     public void addNewFlashCard(FlashCard flashCard){
         if (flashcards.contains(flashCard)){
             return;
@@ -23,6 +24,7 @@ public class FlashSet {
         flashcards.add(flashCard);
     }
 
+    @Override
     public boolean hasSuchFlashCard(String name){
         for (FlashCard flashCard : flashcards){
             if (flashCard.getNativeName().equals(name)){
@@ -32,6 +34,7 @@ public class FlashSet {
         return false;
     }
 
+    @Override
     public boolean isEmpty(){
         return flashcards.isEmpty();
     }

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @NoArgsConstructor
-public class CardChooser {
+public class CardChooser implements Chooser{
     private static final Logger logger = LoggerFactory.getLogger(CardChooser.class);
 
     public int getRandomId(@NotNull Statement statement) throws SQLException {
@@ -25,6 +25,7 @@ public class CardChooser {
         return id;
     }
 
+    @Override
     public boolean isEveryCardLearn(@NotNull Connection connection){
         try (var statement = connection.createStatement()) {
             var resultSet = statement.executeQuery("SELECT COUNT(*) AS LEARNED FROM LEARNSET WHERE learned = false");
@@ -42,6 +43,7 @@ public class CardChooser {
         return false;
     }
 
+    @Override
     public @Nullable FlashCard getCardFromSet(@NotNull Connection connection){
         try (var statement = connection.createStatement()){
             String nativeName = "";

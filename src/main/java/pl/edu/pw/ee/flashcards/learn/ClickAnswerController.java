@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashCard;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
+import pl.edu.pw.ee.flashcards.utils.AnswerUtils;
 import pl.edu.pw.ee.flashcards.utils.DbUtils;
 
 import java.net.URL;
@@ -23,7 +24,7 @@ import static pl.edu.pw.ee.flashcards.learn.Language.NATIVE;
 import static pl.edu.pw.ee.flashcards.learn.SwitchData.*;
 import static pl.edu.pw.ee.flashcards.switcher.FxmlUrls.CHOOSE;
 
-public class ClickAnswerController implements Initializable {
+public class ClickAnswerController implements Initializable, AnswerChecker {
     @FXML
     private Label wordLabel;
     @FXML
@@ -44,6 +45,8 @@ public class ClickAnswerController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(ClickAnswerController.class);
     private FlashCard answerCard;
     private int chosenLanguage;
+    private String userAnswer;
+    private List<RadioButton> buttonList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { //TODO: Checking correct answer and adding it to DB
@@ -72,13 +75,29 @@ public class ClickAnswerController implements Initializable {
         });
 
         submitButton.setOnAction(event -> {
+            checkUserAnswer();
             if (cardChooser.isEveryCardLearn(connection)) {
                 DbUtils.deleteLearnSetData(connection);
+                var alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("GOOD JOB!");
+                alert.setContentText("Congratulations you have passed every flashcard correctly!");
+                alert.showAndWait();
                 SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
             } else {
                 decideWhereToSwitch(location, resources, event);
             }
         });
+    }
+
+    @Override
+    public void checkUserAnswer() {
+        var correctAnswer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
+
+        AnswerUtils.handleAnswer(userAnswer, correctAnswer, connection, answerCard);
+
+        for (RadioButton button : buttonList) {
+            button.setSelected(false);
+        }
     }
 
     public List<String> assignWordsToButtons(){
@@ -114,7 +133,7 @@ public class ClickAnswerController implements Initializable {
 
     public void assignRadioButtonData(){
         var group = new ToggleGroup();
-        var buttonList = new ArrayList<RadioButton>();
+        buttonList = new ArrayList<>();
 
         answerA.setToggleGroup(group);
         buttonList.add(answerA);
@@ -129,10 +148,13 @@ public class ClickAnswerController implements Initializable {
         Collections.shuffle(answerList);
 
         for (int i = 0; i < answerList.size(); i++){
-            buttonList.get(i).setText(answerList.get(i));
+            var answer = answerList.get(i);
+            buttonList.get(i).setText(answer);
+            buttonList.get(i).setOnAction(event -> userAnswer = answer);
         }
         for (int i = answerList.size(); buttonList.size() > answerList.size() && i < buttonList.size(); i++){
             buttonList.get(i).setVisible(false);
+            buttonList.get(i).toBack();
         }
     }
 }
