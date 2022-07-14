@@ -49,7 +49,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
     private List<RadioButton> buttonList;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { //TODO: Checking correct answer and adding it to DB
+    public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
         try {
             random = SecureRandom.getInstanceStrong();
