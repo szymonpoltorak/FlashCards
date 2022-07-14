@@ -2,8 +2,8 @@ package pl.edu.pw.ee.flashcards.utils;
 
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashCard;
@@ -12,14 +12,31 @@ import pl.edu.pw.ee.flashcards.card.FlashSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class CardsReader {
+import static pl.edu.pw.ee.flashcards.utils.Icons.CARDSET;
+import static pl.edu.pw.ee.flashcards.utils.Icons.FLASHCARD;
+
+public class CardsReader implements Reader{
     private static final Logger logger = LoggerFactory.getLogger(CardsReader.class);
+    private final Connection connection;
 
-    private CardsReader(){}
+    public CardsReader(Connection connection){
+        this.connection = connection;
+    }
 
-    public static @Nullable List<FlashSet> readFlashSets(@NotNull Connection connection) {
+    @Override
+    public List<FlashSet> reloadView(TreeView<String> flashCardsTree){
+        var flashSets = readFlashSets();
+        readFlashCardsList(Objects.requireNonNull(flashSets), flashCardsTree);
+
+        return flashSets;
+    }
+
+    @Override
+    public List<FlashSet> readFlashSets() {
         try (var statement = connection.createStatement()) {
             var flashSets = new ArrayList<FlashSet>();
 
@@ -44,18 +61,19 @@ public class CardsReader {
         } catch (SQLException exception) {
             logger.error("Statement created sql exception", exception);
         }
-        return null;
+        return Collections.emptyList();
     }
 
-    public static void readFlashCardsList(@NotNull List<FlashSet> flashSets, @NotNull TreeView<String> flashCardList){
+    @Override
+    public void readFlashCardsList(@NotNull List<FlashSet> flashSets, @NotNull TreeView<String> flashCardList){
         flashCardList.getRoot().getChildren().clear();
         flashCardList.setShowRoot(false);
 
         for (FlashSet flashSet : flashSets){
-            var set = new TreeItem<>(flashSet.getSetName());
+            var set = new TreeItem<>(flashSet.getSetName(), new ImageView(CARDSET.getIcon()));
 
             for (FlashCard flashCard : flashSet.getFlashcards()){
-                set.getChildren().add(new TreeItem<>(flashCard.getNativeName()));
+                set.getChildren().add(new TreeItem<>(flashCard.getNativeName(), new ImageView(FLASHCARD.getIcon())));
             }
             flashCardList.getRoot().getChildren().add(set);
         }

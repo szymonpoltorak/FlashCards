@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.manageset.ManageController">
    <children>
-      <Label layoutX="37.0" layoutY="78.0" prefHeight="86.0" prefWidth="277.0" text="FlashCards Sets" />
-      <ScrollPane layoutX="37.0" layoutY="138.0" prefHeight="420.0" prefWidth="340.0">
+      <Label layoutX="37.0" layoutY="64.0" prefHeight="47.0" prefWidth="286.0" text="FlashCards Sets" />
+      <ScrollPane layoutX="37.0" layoutY="105.0" prefHeight="487.0" prefWidth="361.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="340.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="361.0">
                <children>
-                  <TreeView fx:id="flashCardsTree" prefHeight="420.0" prefWidth="340.0" />
+                  <TreeView fx:id="flashCardsTree" prefHeight="487.0" prefWidth="361.0" />
                </children>
             </AnchorPane>
         </content>

@@ -1,9 +1,13 @@
 # FlashCards
 
+***
+
 ## About a project
 
 Projects aim is to build a GUI app which connects to MySQL database and uses logging and lombok libraries.
 This app lets you create your own flashcards, sort them into sets and of course learn them!
+
+***
 
 ## Technology Stack
 
@@ -13,6 +17,8 @@ This app lets you create your own flashcards, sort them into sets and of course 
 * Lombok 1.18.24,
 * Logback 1.2.11,
 * MySQL.
+
+***
 
 ## Missing Enum Class
 
@@ -36,6 +42,7 @@ public enum SQLSettings {
     }
 }
 ```
+***
 
 ## Icons
 
@@ -45,6 +52,17 @@ Icons I used are not my property, and I do not claim the ownership of them.
 Source: [Flaticon.com](https://www.flaticon.com/free-icons/flash-cards), \
 Author: [Freepik](https://www.flaticon.com/authors/freepik).
 
+* **FlashCardIcon** \
+Source: [Flaticon.com](https://www.flaticon.com/free-icon/card-games_3813722), \
+Author: [Freepik](https://www.flaticon.com/authors/freepik).
+
+* **CardSetIcon** \
+Source: [Flaticon.com](https://www.flaticon.com/free-icon/paper_2541988), \
+Author: [Freepik](https://www.flaticon.com/authors/freepik).
+  
+***
 ## ScreenShots
 
 To be added.
+
+***

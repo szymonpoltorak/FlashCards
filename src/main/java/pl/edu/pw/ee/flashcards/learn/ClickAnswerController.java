@@ -78,10 +78,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
             checkUserAnswer();
             if (cardChooser.isEveryCardLearn(connection)) {
                 DbUtils.deleteLearnSetData(connection);
-                var alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("GOOD JOB!");
-                alert.setContentText("Congratulations you have passed every flashcard correctly!");
-                alert.showAndWait();
+                LearnAlerts.popLearnedAlert();
                 SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
             } else {
                 decideWhereToSwitch(location, resources, event);
@@ -116,6 +113,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
             return list;
         } catch (SQLException exception) {
             logger.error("There is a problem with assigning words to buttons.", exception);
+            LearnAlerts.popSqlError();
         }
         return Collections.emptyList();
     }

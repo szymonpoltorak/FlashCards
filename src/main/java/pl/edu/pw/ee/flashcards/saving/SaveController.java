@@ -2,12 +2,17 @@ package pl.edu.pw.ee.flashcards.saving;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
+import pl.edu.pw.ee.flashcards.utils.CardsReader;
+import pl.edu.pw.ee.flashcards.utils.Reader;
 import pl.edu.pw.ee.flashcards.utils.Utility;
 
 import java.net.URL;
@@ -34,24 +39,26 @@ public class SaveController implements Initializable {
     private List<FlashSet> flashSets;
     private Connection connection;
     private static final Logger logger = LoggerFactory.getLogger(SaveController.class);
+    private Reader cardsReader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
+        cardsReader = new CardsReader(connection);
         flashCardsTree.setRoot(new TreeItem<>("Root"));
-        flashSets = Utility.reloadView(connection, flashCardsTree);
+        flashSets = cardsReader.reloadView(flashCardsTree);
 
         returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
 
         addButton.setOnAction(event -> {
             if (insertItemsToDataBase()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
 
         deleteButton.setOnAction(event -> {
             if (deleteSelectedFlashCard()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
     }
