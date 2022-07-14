@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.ee.flashcards.manageset.ManageController">
    <children>
-      <Label layoutX="37.0" layoutY="64.0" prefHeight="47.0" prefWidth="286.0" text="FlashCards Sets" />
+      <Label fx:id="setsLabel" layoutX="37.0" layoutY="64.0" prefHeight="40.0" prefWidth="361.0" text="FlashCards Sets" />
       <ScrollPane layoutX="37.0" layoutY="105.0" prefHeight="487.0" prefWidth="361.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="361.0">
@@ -19,16 +19,16 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="removeButton" layoutX="625.0" layoutY="308.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Remove" />
-      <Button fx:id="createSet" layoutX="625.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="New Set" />
-      <TextField fx:id="setNameField" layoutX="625.0" layoutY="164.0" />
-      <Label layoutX="625.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="Set Name" />
-      <Button fx:id="editButton" layoutX="444.0" layoutY="202.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Edit" />
-      <TextField fx:id="editNameField" layoutX="445.0" layoutY="164.0" />
-      <Label layoutX="446.0" layoutY="138.0" prefHeight="17.0" prefWidth="149.0" text="New Name" />
+      <Button fx:id="removeButton" layoutX="625.0" layoutY="387.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Remove" />
+      <Button fx:id="createSet" layoutX="625.0" layoutY="267.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="New Set" />
+      <TextField fx:id="setNameField" layoutX="625.0" layoutY="237.0" />
+      <Label layoutX="625.0" layoutY="209.0" prefHeight="17.0" prefWidth="149.0" text="Set Name" />
+      <Button fx:id="editButton" layoutX="444.0" layoutY="267.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Edit" />
+      <TextField fx:id="editNameField" layoutX="444.0" layoutY="237.0" />
+      <Label layoutX="446.0" layoutY="209.0" prefHeight="17.0" prefWidth="149.0" text="New Name" />
       <Button fx:id="returnButton" layoutX="625.0" layoutY="511.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Return" />
-      <TextField fx:id="moveField" layoutX="446.0" layoutY="277.0" />
-      <Label layoutX="446.0" layoutY="260.0" prefHeight="17.0" prefWidth="149.0" text="Where move" />
-      <Button fx:id="moveButton" layoutX="445.0" layoutY="308.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Move" />
+      <TextField fx:id="moveField" layoutX="446.0" layoutY="349.0" />
+      <Label layoutX="444.0" layoutY="325.0" prefHeight="17.0" prefWidth="149.0" text="Where move" />
+      <Button fx:id="moveButton" layoutX="444.0" layoutY="387.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="149.0" text="Move" />
    </children>
 </AnchorPane>

@@ -11,11 +11,11 @@
     -fx-font-size: 45px;
 }
 
-#nativeName{
-    -fx-background-color: azure;
+#setsLabel{
+    -fx-font-size: 25px;
 }
 
-#foreignName{
+.text-field{
     -fx-background-color: azure;
 }
 
