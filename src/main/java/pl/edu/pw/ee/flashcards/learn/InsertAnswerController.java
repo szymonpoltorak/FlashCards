@@ -69,6 +69,7 @@ public class InsertAnswerController implements Initializable, AnswerChecker {
             checkUserAnswer();
             if (cardChooser.isEveryCardLearn(connection)) {
                 DbUtils.deleteLearnSetData(connection);
+                LearnAlerts.popLearnedAlert();
                 SceneSwitcher.switchToNewScene(CHOOSE.getPath(), event);
             } else {
                 userAnswerField.clear();

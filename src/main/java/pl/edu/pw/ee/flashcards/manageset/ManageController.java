@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
+import pl.edu.pw.ee.flashcards.learn.LearnAlerts;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 import pl.edu.pw.ee.flashcards.utils.CardsReader;
 import pl.edu.pw.ee.flashcards.utils.Reader;
@@ -154,6 +155,7 @@ public class ManageController implements Initializable {
             statement.executeUpdate("UPDATE FLASHCARD SET `set_name` = '" + newSetName + "' WHERE `native_name` LIKE '" + selectedItem.getValue() + "'");
         } catch (SQLException exception) {
             logger.error("There is problem with moving flashcard to another set.", exception);
+            LearnAlerts.popSqlError();
         }
         return true;
     }
