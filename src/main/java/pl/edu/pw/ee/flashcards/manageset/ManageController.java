@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashSet;
 import pl.edu.pw.ee.flashcards.database.Connector;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
+import pl.edu.pw.ee.flashcards.utils.CardsReader;
+import pl.edu.pw.ee.flashcards.utils.Reader;
 import pl.edu.pw.ee.flashcards.utils.Utility;
 
 import java.net.URL;
@@ -43,34 +45,36 @@ public class ManageController implements Initializable {
     private List<FlashSet> flashSets;
     private Connection connection;
     private static final Logger logger = LoggerFactory.getLogger(ManageController.class);
+    private Reader cardsReader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
+        cardsReader = new CardsReader(connection);
         flashCardsTree.setRoot(new TreeItem<>("root"));
-        flashSets = Utility.reloadView(connection, flashCardsTree);
+        flashSets = cardsReader.reloadView(flashCardsTree);
 
         createSet.setOnAction(event -> {
             if (createNewSet()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
 
         removeButton.setOnAction(event -> {
             if (removeSet()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
 
         editButton.setOnAction(event -> {
             if (editName()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
 
         moveButton.setOnAction(event -> {
             if (moveElement()){
-                flashSets = Utility.reloadView(connection, flashCardsTree);
+                flashSets = cardsReader.reloadView(flashCardsTree);
             }
         });
 

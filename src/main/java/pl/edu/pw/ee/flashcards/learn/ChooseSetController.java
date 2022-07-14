@@ -15,6 +15,7 @@ import pl.edu.pw.ee.flashcards.manageset.ManageController;
 import pl.edu.pw.ee.flashcards.switcher.SceneSwitcher;
 import pl.edu.pw.ee.flashcards.utils.CardsReader;
 import pl.edu.pw.ee.flashcards.utils.DbUtils;
+import pl.edu.pw.ee.flashcards.utils.Reader;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -23,7 +24,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -46,11 +46,13 @@ public class ChooseSetController implements Initializable {
     private int numberOfCards;
     private static final Logger logger = LoggerFactory.getLogger(ChooseSetController.class);
     private Random random;
+    private Reader reader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
-        flashSets = CardsReader.readFlashSets(Objects.requireNonNull(connection));
+        reader = new CardsReader(connection);
+        flashSets = reader.readFlashSets();
         readSetList();
 
         try {
