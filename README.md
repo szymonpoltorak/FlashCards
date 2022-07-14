@@ -42,6 +42,7 @@ public enum SQLSettings {
     }
 }
 ```
+
 ***
 
 ## Icons
@@ -65,8 +66,25 @@ Source: [Freepik.com](https://www.freepik.com/free-vector/blue-fluid-background_
 Source: [rawpixel.com](https://www.freepik.com/author/rawpixel-com).
   
 ***
+
 ## ScreenShots
 
-To be added.
+**Main Page**
+![](./.github/screenShots/main.png)
+
+**Adding Page**
+![](./.github/screenShots/add.png)
+
+**Managing Sets**
+![](./.github/screenShots/manage.png)
+
+**Choosing Sets**
+![](./.github/screenShots/choose.png)
+
+**Inserting Answer**
+![](./.github/screenShots/insert.png)
+
+**Clicking Answer**
+![](./.github/screenShots/click.png)
 
 ***
