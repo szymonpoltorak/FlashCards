@@ -1,3 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 .label{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 13px;
     -fx-alignment: center;
+    -fx-color: #05192E;
+}
+
+#mainLabel{
+    -fx-font-size: 45px;
+}
+
+#setsLabel{
+    -fx-font-size: 25px;
+}
+
+.text-field{
+    -fx-background-color: azure;
+}
+
+#scrollSave{
+    -fx-background-color: azure;
+}
+
+#anchorSave{
+    -fx-background-color: azure;
+}
+
+#flashLabel{
+    -fx-font-size: 25px;
+}
+
+#flashCardsTree{
+    -fx-background-color: azure;
+    -fx-font-family: 'Ubuntu', sans-serif;
+}
+
+#wordLabel{
+    -fx-font-size: 25px;
+    -fx-font-weight: bolder;
+}
+
+#insertPane{
+    -fx-background-image: url('../images/background_insert.jpg');
+}
+
+#clickPane{
+    -fx-background-image: url('../images/background_click.jpg');
+}
+
+#setList{
+    -fx-font-family: 'Ubuntu', sans-serif;
+}
+
+#chooseLabel {
+    -fx-font-size: 25px;
+}
+
+.button{
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 15px;
+    -fx-color: #9FC7F3;
+}
+
+.button:hover{
+    -fx-color: #6691ec;
+}
+
+#mainPane{
+    -fx-background-image: url('../images/background_image.jpg');
+}
+
+.radio-button{
+    -fx-font-size: 13px;
+    -fx-color: azure;
 }
