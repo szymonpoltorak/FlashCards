@@ -14,7 +14,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="406.0" prefWidth="297.0">
                <children>
-                  <TreeView fx:id="flashCardsTree" layoutY="3.0" prefHeight="406.0" prefWidth="297.0" />
+                  <TreeView fx:id="flashCardsTree" prefHeight="406.0" prefWidth="297.0" />
                </children>
           </AnchorPane>
         </content>
@@ -25,5 +25,6 @@
       <Button fx:id="returnButton" layoutX="588.0" layoutY="449.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" text="Return To Main Screen" />
       <Label layoutX="419.0" layoutY="313.0" prefHeight="25.0" prefWidth="149.0" text="Foreign Name" />
       <Label layoutX="588.0" layoutY="313.0" prefHeight="25.0" prefWidth="149.0" text="Native Name" />
+      <Button fx:id="deleteButton" layoutX="419.0" layoutY="398.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="149.0" text="Delete" />
    </children>
 </AnchorPane>

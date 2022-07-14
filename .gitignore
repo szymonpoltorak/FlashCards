@@ -27,4 +27,6 @@ mvnw.cmd
 *.fdb_latexmk
 *.toc
 
+src/main/java/pl/edu/pw/ee/flashcards/database/SQLSettings.java
+
 *:Zone.identifier
