@@ -36,6 +36,11 @@
     -fx-font-family: 'Ubuntu', sans-serif;
 }
 
+#wordLabel{
+    -fx-font-size: 25px;
+    -fx-font-weight: bolder;
+}
+
 #insertPane{
     -fx-background-image: url('../images/background_insert.jpg');
 }
@@ -67,5 +72,6 @@
 }
 
 .radio-button{
-    -fx-alignment: center;
+    -fx-font-size: 13px;
+    -fx-color: azure;
 }
