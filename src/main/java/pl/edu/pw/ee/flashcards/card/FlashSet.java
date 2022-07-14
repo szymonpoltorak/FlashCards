@@ -18,7 +18,7 @@ public class FlashSet implements CardSet {
 
     @Override
     public void addNewFlashCard(FlashCard flashCard){
-        if (flashcards.contains(flashCard)){
+        if (flashcards.contains(flashCard) || flashCard == null){
             return;
         }
         flashcards.add(flashCard);
