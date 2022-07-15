@@ -45,9 +45,9 @@ public enum SQLSettings {
 
 ***
 
-## Icons
+## Credits to Authors
 
-Icons I used are not my property, and I do not claim the ownership of them.
+Icons and font I used are not my property, and I do not claim the ownership of them.
 
 * **Application Icon**: \
 Source: [Flaticon.com](https://www.flaticon.com/free-icons/flash-cards), \
@@ -63,7 +63,11 @@ Author: [Freepik](https://www.flaticon.com/authors/freepik),
 
 * **BackGroundImage** \
 Source: [Freepik.com](https://www.freepik.com/free-vector/blue-fluid-background_16326494.htm#query=graphics&position=22&from_view=search), \
-Source: [rawpixel.com](https://www.freepik.com/author/rawpixel-com).
+Author: [rawpixel.com](https://www.freepik.com/author/rawpixel-com).
+
+* **Ubuntu Font** \
+Source: [Google Fonts](https://fonts.google.com/specimen/Ubuntu?query=Ub), \
+Author: [Dalton Maag](https://fonts.google.com/?query=Dalton+Maag).
   
 ***
 
