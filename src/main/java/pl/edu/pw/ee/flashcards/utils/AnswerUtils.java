@@ -1,7 +1,6 @@
 package pl.edu.pw.ee.flashcards.utils;
 
 import javafx.scene.control.Alert;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.card.FlashCard;
@@ -14,7 +13,7 @@ public class AnswerUtils {
 
     private AnswerUtils(){}
 
-    public static void handleAnswer(String userAnswer, @NotNull String correctAnswer, Connection connection, FlashCard answerCard){
+    public static void handleAnswer(String userAnswer, String correctAnswer, Connection connection, FlashCard answerCard){
         if (!correctAnswer.equals(userAnswer)){
             var alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Your answer");

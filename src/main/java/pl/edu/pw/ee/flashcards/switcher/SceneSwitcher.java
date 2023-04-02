@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.pw.ee.flashcards.database.Connector;
@@ -27,7 +26,7 @@ public class SceneSwitcher {
 
     private SceneSwitcher(){}
 
-    public static void switchToNewScene(URL sceneUrl, @NotNull ActionEvent event) {
+    public static void switchToNewScene(URL sceneUrl, ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(sceneUrl);
             var stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

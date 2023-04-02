@@ -39,12 +39,11 @@ public class SaveController implements Initializable {
     private List<FlashSet> flashSets;
     private Connection connection;
     private static final Logger logger = LoggerFactory.getLogger(SaveController.class);
-    private Reader cardsReader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
-        cardsReader = new CardsReader(connection);
+        Reader cardsReader = new CardsReader(connection);
         flashCardsTree.setRoot(new TreeItem<>("Root"));
         flashSets = cardsReader.reloadView(flashCardsTree);
 
@@ -63,7 +62,7 @@ public class SaveController implements Initializable {
         });
     }
 
-    public boolean insertItemsToDataBase(){
+    private boolean insertItemsToDataBase(){
         try (var statement = connection.createStatement()) {
             var foreign = foreignName.getText().trim();
             var motherName = nativeName.getText().trim();
@@ -83,7 +82,7 @@ public class SaveController implements Initializable {
         return false;
     }
 
-    public boolean deleteSelectedFlashCard(){
+    private boolean deleteSelectedFlashCard(){
         var selectedItem = flashCardsTree.getSelectionModel().getSelectedItem();
 
         if (Utility.isThereSuchElement(selectedItem.getValue(), flashSets)) {

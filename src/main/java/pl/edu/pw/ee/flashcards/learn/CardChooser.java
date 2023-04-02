@@ -1,7 +1,6 @@
 package pl.edu.pw.ee.flashcards.learn;
 
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ import java.sql.Statement;
 public class CardChooser implements Chooser{
     private static final Logger logger = LoggerFactory.getLogger(CardChooser.class);
 
-    public int getRandomId(@NotNull Statement statement) throws SQLException {
+    private int getRandomId(Statement statement) throws SQLException {
         var resultSet = statement.executeQuery("SELECT `card_id` FROM LEARNSET WHERE learned = FALSE ORDER BY RAND() LIMIT 1");
         int id = -1;
 
@@ -26,7 +25,7 @@ public class CardChooser implements Chooser{
     }
 
     @Override
-    public boolean isEveryCardLearn(@NotNull Connection connection){
+    public final boolean isEveryCardLearn(Connection connection){
         try (var statement = connection.createStatement()) {
             var resultSet = statement.executeQuery("SELECT COUNT(*) AS LEARNED FROM LEARNSET WHERE learned = false");
             int number = -1;
@@ -44,7 +43,7 @@ public class CardChooser implements Chooser{
     }
 
     @Override
-    public @Nullable FlashCard getCardFromSet(@NotNull Connection connection){
+    public final @Nullable FlashCard getCardFromSet(Connection connection){
         try (var statement = connection.createStatement()){
             String nativeName = "";
             String foreignName = "";

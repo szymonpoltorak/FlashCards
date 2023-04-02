@@ -9,20 +9,10 @@ public class Utility {
     private Utility(){}
 
     public static boolean isThereSuchElement(String name, @NotNull List<FlashSet> flashSets){
-        for (FlashSet flashSet : flashSets){
-            if (flashSet.getSetName().equals(name)){
-                return true;
-            }
-        }
-        return false;
+        return flashSets.stream().filter(flashSet -> flashSet.getSetName().equals(name)).count() == 1L;
     }
 
     public static boolean isThereSuchFlashCard(String name, @NotNull List<FlashSet> flashSets){
-        for (FlashSet flashSet : flashSets){
-            if (flashSet.hasSuchFlashCard(name)){
-                return true;
-            }
-        }
-        return false;
+        return flashSets.stream().filter(flashSet -> flashSet.hasSuchFlashCard(name)).count() == 1L;
     }
 }

@@ -12,7 +12,7 @@ public class FlashCard {
     private int id;
 
     @Override
-    public String toString(){
+    public final String toString(){
         return "NativeName : " + nativeName + ";  ForeignName : " + foreignName + ";  ID : " + id + ";\n";
     }
 }

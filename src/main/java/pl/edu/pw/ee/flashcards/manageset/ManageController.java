@@ -3,7 +3,6 @@ package pl.edu.pw.ee.flashcards.manageset;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +48,7 @@ public class ManageController implements Initializable {
     private Reader cardsReader;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
         cardsReader = new CardsReader(connection);
         flashCardsTree.setRoot(new TreeItem<>("root"));
@@ -82,7 +81,7 @@ public class ManageController implements Initializable {
         returnButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MAIN.getPath(), event));
     }
 
-    public boolean createNewSet(){
+    private boolean createNewSet(){
         var name = setNameField.getText();
 
         if (Utility.isThereSuchElement(name, flashSets)){
@@ -100,7 +99,7 @@ public class ManageController implements Initializable {
         return false;
     }
 
-    public boolean removeSet(){
+    private boolean removeSet(){
         var selectedItem = flashCardsTree.getSelectionModel().getSelectedItem();
 
         if (!Utility.isThereSuchElement(selectedItem.getValue(), flashSets)){
@@ -118,7 +117,7 @@ public class ManageController implements Initializable {
         return false;
     }
 
-    public boolean editName(){
+    private boolean editName(){
         var newName = editNameField.getText();
         var selectedItem = flashCardsTree.getSelectionModel().getSelectedItem();
         var selectedName = selectedItem.getValue();
@@ -142,7 +141,7 @@ public class ManageController implements Initializable {
         return false;
     }
 
-    public boolean moveElement(){
+    private boolean moveElement(){
         var newSetName = moveField.getText();
         var selectedItem = flashCardsTree.getSelectionModel().getSelectedItem();
 
@@ -160,7 +159,7 @@ public class ManageController implements Initializable {
         return true;
     }
 
-    public static @Nullable FlashSet getProperFlashSet(String name, @NotNull List<FlashSet> flashSets){
+    public static @Nullable FlashSet getProperFlashSet(String name, List<FlashSet> flashSets){
         for (FlashSet flashSet : flashSets){
             if (flashSet.getSetName().equals(name)){
                 return flashSet;
@@ -169,7 +168,7 @@ public class ManageController implements Initializable {
         return null;
     }
 
-    public void editFlashSetsName(String selectedName, String newName, Statement statement) throws SQLException{
+    private void editFlashSetsName(String selectedName, String newName, Statement statement) throws SQLException{
         var flashSet = getProperFlashSet(selectedName, flashSets);
 
         if (flashSet == null){
@@ -187,7 +186,7 @@ public class ManageController implements Initializable {
         }
     }
 
-    public void editFlashCardsName(Statement statement, String newName, String selectedName) throws SQLException{
+    private void editFlashCardsName(Statement statement, String newName, String selectedName) throws SQLException{
         var dialog = new TextInputDialog();
         dialog.setTitle("Need more intel");
         dialog.setContentText("Please give me a foreign name you want to edit. Leave free space to not change");

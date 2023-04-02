@@ -9,7 +9,7 @@ public enum Language {
         this.langId = langId;
     }
 
-    public int getLangId() {
+    int getLangId() {
         return langId;
     }
 }

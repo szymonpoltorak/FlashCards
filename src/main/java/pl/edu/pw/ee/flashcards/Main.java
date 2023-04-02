@@ -17,7 +17,7 @@ import static pl.edu.pw.ee.flashcards.switcher.SceneSettings.STYLE;
 
 public class Main extends Application {
     @Override
-    public void start(@NotNull Stage stage) throws IOException {
+    public final void start(@NotNull Stage stage) throws IOException {
         var scene = new Scene(FXMLLoader.load(MAIN.getPath()));
 
         stage.setTitle("FlashCards");

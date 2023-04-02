@@ -1,6 +1,5 @@
 package pl.edu.pw.ee.flashcards.utils;
 
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +11,7 @@ public class DbUtils {
 
     private DbUtils(){}
 
-    public static void deleteLearnSetData(@NotNull Connection connection){
+    public static void deleteLearnSetData(Connection connection){
         try(var statement = connection.createStatement()){
             statement.execute("DELETE FROM LEARNSET;");
             statement.execute("ALTER TABLE LEARNSET AUTO_INCREMENT = 1;");

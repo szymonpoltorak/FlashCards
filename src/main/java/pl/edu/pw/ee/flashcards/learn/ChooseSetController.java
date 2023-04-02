@@ -2,7 +2,10 @@ package pl.edu.pw.ee.flashcards.learn;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -48,7 +51,7 @@ public class ChooseSetController implements Initializable {
     private Reader reader;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
         reader = new CardsReader(connection);
         flashSets = reader.readFlashSets();
@@ -83,7 +86,7 @@ public class ChooseSetController implements Initializable {
         });
     }
 
-    public void readSetList(){
+    private void readSetList(){
         setList.getItems().clear();
 
         for (FlashSet flashSet : flashSets){
@@ -101,7 +104,7 @@ public class ChooseSetController implements Initializable {
         });
     }
 
-    public boolean prepareDataBaseTable(){
+    private boolean prepareDataBaseTable(){
         try (var statement = connection.createStatement()){
             var set = ManageController.getProperFlashSet(setList.getSelectionModel().getSelectedItem(), flashSets);
 
@@ -129,7 +132,7 @@ public class ChooseSetController implements Initializable {
         return false;
     }
 
-    public boolean wasThereDuplicate(@NotNull ResultSet result, int id) throws SQLException{
+    private boolean wasThereDuplicate(@NotNull ResultSet result, int id) throws SQLException{
         while (result.next()){
             if (result.getInt("card_id") == id){
                 return true;

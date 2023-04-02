@@ -49,7 +49,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
     private List<RadioButton> buttonList;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
         try {
             random = SecureRandom.getInstanceStrong();
@@ -87,7 +87,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
     }
 
     @Override
-    public void checkUserAnswer() {
+    public final void checkUserAnswer() {
         var correctAnswer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
 
         AnswerUtils.handleAnswer(userAnswer, correctAnswer, connection, answerCard);
@@ -97,9 +97,9 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
         }
     }
 
-    public List<String> assignWordsToButtons(){
+    private List<String> assignWordsToButtons(){
         try (var statement = connection.createStatement()) {
-            var list = new ArrayList<String>();
+            List<String> list = new ArrayList<>();
             var answerLocalised = chosenLanguage == FOREIGN.getLangId() ? "f.native_name" : "f.foreign_name";
             var resultSet = statement.executeQuery("SELECT " + answerLocalised +
                             " FROM LEARNSET l INNER JOIN FLASHCARD f ON (l.card_id = f.card_id) WHERE NOT (f.card_id = "
@@ -118,7 +118,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
         return Collections.emptyList();
     }
 
-    public void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
+    private void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
         var destination = random.nextInt(RAND_BOUND.getValue());
 
         if (destination == CLICK_DESTINATION.getValue()){
@@ -129,7 +129,7 @@ public class ClickAnswerController implements Initializable, AnswerChecker {
         }
     }
 
-    public void assignRadioButtonData(){
+    private void assignRadioButtonData(){
         var group = new ToggleGroup();
         buttonList = new ArrayList<>();
 

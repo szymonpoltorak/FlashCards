@@ -25,7 +25,7 @@ public class MainController implements Initializable {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         addButton.setOnAction(event -> SceneSwitcher.switchToNewScene(SAVE.getPath(), event));
 
         manageSetButton.setOnAction(event -> SceneSwitcher.switchToNewScene(MANAGE.getPath(), event));
@@ -35,7 +35,7 @@ public class MainController implements Initializable {
         createNecessary();
     }
 
-    public void createNecessary(){
+    private void createNecessary(){
         try (var connector = Connector.establishConnection()) {
             if (connector == null){
                 throw new SQLException();

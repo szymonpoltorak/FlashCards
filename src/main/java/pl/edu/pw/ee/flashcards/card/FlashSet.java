@@ -4,12 +4,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode
 @Getter
 public class FlashSet implements CardSet {
     private final String setName;
-    private final ArrayList<FlashCard> flashcards;
+    private final List<FlashCard> flashcards;
 
     public FlashSet(String setName){
         this.setName = setName;
@@ -17,7 +18,7 @@ public class FlashSet implements CardSet {
     }
 
     @Override
-    public void addNewFlashCard(FlashCard flashCard){
+    public final void addNewFlashCard(FlashCard flashCard){
         if (flashcards.contains(flashCard) || flashCard == null){
             return;
         }
@@ -25,22 +26,17 @@ public class FlashSet implements CardSet {
     }
 
     @Override
-    public boolean hasSuchFlashCard(String name){
-        for (FlashCard flashCard : flashcards){
-            if (flashCard.getNativeName().equals(name)){
-                return true;
-            }
-        }
-        return false;
+    public final boolean hasSuchFlashCard(String name){
+        return flashcards.stream().filter(flashCard -> flashCard.getNativeName().equals(name)).count() == 1L;
     }
 
     @Override
-    public boolean isEmpty(){
+    public final boolean isEmpty(){
         return flashcards.isEmpty();
     }
 
     @Override
-    public String toString(){
+    public final String toString(){
         var builder = new StringBuilder();
 
         builder.append("\nSetName : ").append(setName).append(";\n");

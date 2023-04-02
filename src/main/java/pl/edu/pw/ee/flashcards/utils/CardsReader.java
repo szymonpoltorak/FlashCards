@@ -28,7 +28,7 @@ public class CardsReader implements Reader{
     }
 
     @Override
-    public List<FlashSet> reloadView(TreeView<String> flashCardsTree){
+    public final List<FlashSet> reloadView(TreeView<String> flashCardsTree){
         var flashSets = readFlashSets();
         readFlashCardsList(Objects.requireNonNull(flashSets), flashCardsTree);
 
@@ -36,7 +36,7 @@ public class CardsReader implements Reader{
     }
 
     @Override
-    public List<FlashSet> readFlashSets() {
+    public final List<FlashSet> readFlashSets() {
         try (var statement = connection.createStatement()) {
             var flashSets = new ArrayList<FlashSet>();
 
@@ -65,7 +65,7 @@ public class CardsReader implements Reader{
     }
 
     @Override
-    public void readFlashCardsList(@NotNull List<FlashSet> flashSets, @NotNull TreeView<String> flashCardList){
+    public final void readFlashCardsList(@NotNull List<FlashSet> flashSets, @NotNull TreeView<String> flashCardList){
         flashCardList.getRoot().getChildren().clear();
         flashCardList.setShowRoot(false);
 

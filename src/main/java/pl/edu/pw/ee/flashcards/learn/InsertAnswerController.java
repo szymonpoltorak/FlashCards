@@ -42,7 +42,7 @@ public class InsertAnswerController implements Initializable, AnswerChecker {
     private int chosenLanguage;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(URL location, ResourceBundle resources) {
         connection = Connector.establishConnection();
         try {
             random = SecureRandom.getInstanceStrong();
@@ -79,14 +79,14 @@ public class InsertAnswerController implements Initializable, AnswerChecker {
     }
 
     @Override
-    public void checkUserAnswer(){
+    public final void checkUserAnswer(){
         var userAnswer = userAnswerField.getText();
         var correctAnswer = chosenLanguage == NATIVE.getLangId() ? answerCard.getForeignName() : answerCard.getNativeName();
 
         AnswerUtils.handleAnswer(userAnswer, correctAnswer, connection, answerCard);
     }
 
-    public void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
+    private void decideWhereToSwitch(URL location, ResourceBundle resources, ActionEvent event){
         var destination = random.nextInt(RAND_BOUND.getValue());
 
         if (destination == INSERT_DESTINATION.getValue()){

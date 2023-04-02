@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 public class LearnAlerts {
     private LearnAlerts(){}
 
-    public static void popLearnedAlert(){
+    static void popLearnedAlert(){
         var alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("GOOD JOB!");
         alert.setContentText("Congratulations you have passed every flashcard correctly!");
@@ -19,7 +19,7 @@ public class LearnAlerts {
         alert.showAndWait();
     }
 
-    public static void popEmptySetError(){
+    static void popEmptySetError(){
         var alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Working error");
         alert.setContentText("This is empty, you cannot learn from it!");
